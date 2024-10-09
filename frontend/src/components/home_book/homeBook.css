@@ -1,0 +1,42 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300..900&display=swap');
+
+.news-container-homebook {
+    position: relative;
+    width: 200px;
+    height: 100%;
+    text-decoration: none !important;
+    text-decoration-color: transparent;
+}
+.news-image-homebook {
+    width: 120px;
+    height: 160px;
+}
+.news-container-homebook a,
+.news-container-homebook a:link,
+.news-container-homebook a:visited,
+.news-container-homebook a:hover,
+.news-container-homebook a:active {
+    text-decoration: none !important;
+}
+.news-description-homebook {
+    height: 60px;
+    overflow: hidden;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+.news-description-homebook h3 {
+    margin-top: 5px;
+    color: #D2CBC1;
+    font-size: 20px;
+    font-family: 'Frank Ruhl Libre', serif;
+    font-weight: 400;
+    align-items: center;
+    overflow-wrap: break-word;
+    white-space: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
