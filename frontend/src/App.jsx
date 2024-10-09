@@ -5,6 +5,9 @@ import Login from "./pages/Login.jsx";
 import SignUp from './pages/Signup.jsx';
 import Home from './pages/Home.jsx';
 import Profile from './pages/Profile.jsx';
+import Help from './pages/Help.jsx';
+import AboutUs from './pages/AboutUs.jsx';
+import Contact from './pages/Contact.jsx';
 import axios from '../axiosConfig.js';
 const App = () => {
     // const [isLoggedIn,setIsLoggedIn] = useState(false);
@@ -36,6 +39,9 @@ const App = () => {
                 <Route exact path="/login" element={<Login/>}/>
                 <Route exact path="/signup" element={<SignUp/>} />
                 <Route exact path="/profile" element={<Profile/>} />
+                <Route exact path="/help" element={<Help />} />
+                <Route exact path="/aboutus" element={<AboutUs />} />
+                <Route exact path="/contact" element={<Contact />} />
             </Routes>
         </Router>
     );
