@@ -1,0 +1,119 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300..900&display=swap');
+
+/*naglowek*/
+/*srodek*/
+.login-container{
+    height: 100vh;
+    width: 100vw;
+    margin-top: 0;
+    position: fixed;
+    left: 0;
+}
+.login-main{
+    margin-top: 10vh;
+    min-height: 80vh;
+}
+body{
+    background-color: #0B0C0B;
+    width:100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    margin: 0%;
+    min-height: 100vh;
+}
+.login{
+    align-items: center;
+    justify-content: center;
+}
+.form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+.logoPhoto{
+    display: none;
+}
+#login-title{
+    color: #D2CBC1;
+    font-family:'Frank Ruhl Libre',serif;
+    font-weight: 400;
+    font-size:64px;
+}
+#email, #password{
+    background-color:#D2CBC1;
+    opacity: 0.55;
+    border: none;
+    width: 24vw;
+    height: 7vh;
+}
+#email::placeholder , #password::placeholder {
+    color:#0A0805;
+    font-family:'Roboto', serif;
+    font-size:24px;
+}
+#login-button{
+    background-color: #4D5038;
+    color: #0A0805;
+    font-family:'Frank Ruhl Libre',serif;
+    border: none;
+    font-size:24px;
+    width: 24vw;
+    height: 7vh;
+    margin-top: 10vh;
+}
+.goToSignup{
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+}
+.donthaveanaccount{
+    color:#D2CBC1;
+    font-family:'Frank Ruhl Libre',serif;
+    font-size:22px;
+}
+.signup{
+    color:#588527;
+    text-decoration: none;
+    font-family:'Frank Ruhl Libre',serif;
+    font-size:22px;
+}
+/*stopka*/
+
+@media (max-width: 400px) {
+    body{
+        width: calc(100vw - 1px);
+    }
+    .news{
+        width: calc(100vw - 1px);
+        height: 14rem;
+    }
+    li a {
+        margin-left: 10px;
+    }
+    .login-main{
+        margin-top: 0%;
+        width: calc(100vw - 1px);
+    }
+    .logoPhoto{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .logoPhoto img{
+        width: 60%;
+        height: 60%;
+    }
+    #email, #password{
+        width: 90vw;
+    }
+    #login-button{
+        width: 90vw;
+        margin-top: 10vh;
+    }
+
+}

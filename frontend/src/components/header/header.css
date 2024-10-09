@@ -1,0 +1,127 @@
+@import url('https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300..900&display=swap');
+.header-nav {
+    width: 100vw;
+    height: 10vh;
+    position: fixed;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: #0B0C0B;
+    box-shadow: 0 1px 1px #000000;
+    z-index: 999;
+}
+
+.images-container img {
+    width:  10vh;
+    height:  10vh;
+}
+
+.images-container {
+    margin-left: 2vh;
+    display: inline-flex;
+}
+
+.header-nav ul {
+    height: 10vh;
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin: 0;
+}
+
+.header-nav li {
+    display: flex;
+    justify-content: center;
+}
+
+.header-nav a {
+    text-decoration: none;
+    color: #D2CBC1;
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size:20px;
+    font-weight: 400;
+}
+
+.header-nav li a.active {
+    color: #6F7D09;
+    font-weight: 600;
+}
+
+.header-nav ul li:nth-child(6) {
+    margin-right: 2%;
+}
+.header-nav ul li:not(:first-child) img {
+    display: none;
+}
+#signup-link {
+    background-color: #4D5038;
+    color: #0A0805;
+    margin-right: 2vh;
+    padding: 2vh 1vh;
+}
+
+@media (max-width: 900px) {
+    .header-nav.logsign-page {
+        display: none;
+    }
+    .header-nav{
+        position: fixed;
+        bottom: 0;
+        top: auto;
+        padding: 0;
+        width: 100vw;
+        padding: 0;
+        box-shadow: 0 -1px 1px #000000;
+    }
+    .header-nav ul li:nth-child(6) {
+        display: block;
+    }
+    .header-nav ul li:first-child {
+        display: none;
+    }
+    .header-nav ul li:not(:first-child) img {
+        display: block;
+    }
+    .loginsignup{
+        display: flex;
+        justify-items: center;
+        align-self: center;
+    }
+    .loginsignup a:first-child{
+        display: none;
+    }
+    #signup-link{
+        margin-right: 0px;
+    }
+    .header-nav li {
+        align-items: center;
+        margin-right: 0;
+        height: 100%;
+        margin-bottom: 0px;
+    }
+    .header-nav ul {
+        display: flex;
+        align-items: start;
+        justify-content: space-around;
+    }
+    .header-nav a {
+        display: flex;
+        flex-direction: column;
+        font-size:12px;
+        font-weight: 400;
+        align-items: center;
+        justify-content: center;
+    }
+    .header-nav ul li:nth-child(6) {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .header-nav ul li:nth-child(6) {
+        margin-right: 0%;
+    }
+}

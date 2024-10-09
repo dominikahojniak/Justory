@@ -11,3 +11,43 @@ spring:
     properties:
       hibernate:
         dialect: 'org.hibernate.dialect.PostgreSQLDialect'
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB
+      max-request-size: 10MB
+  mvc:
+    converters:
+      preferred-json-mapper: jackson
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: skubik1411@gmail.com
+    password: fkbb zvhs nnkr pjtz
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+          ssl:
+            trust: smtp.gmail.com
+  rabbitmq:
+    host: localhost
+    port: 5672
+  task:
+    scheduling:
+      pool:
+        size: 5
+
+application:
+  security:
+    jwt:
+      secret-key: ef80bec4819d5cd11ec5117d2dacd52a3c20503c84bfa47df1084a2567ab9056
+      expiration: 86400000
+  file:
+    upload:
+      photos: ./uploads
+app:
+  url: http://localhost:5173
