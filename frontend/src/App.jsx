@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Login from "./pages/Login.jsx";
 import SignUp from './pages/Signup.jsx';
+import Home from './pages/Home.jsx';
+import Profile from './pages/Profile.jsx';
 import axios from '../axiosConfig.js';
 const App = () => {
     // const [isLoggedIn,setIsLoggedIn] = useState(false);
@@ -30,9 +32,10 @@ const App = () => {
         <Router>
             <Routes>
                 <Route exact path="/" element={<Login/>} />
-                {/*<Route exact path="/home" element={<Home/>} />*/}
+                <Route exact path="/home" element={<Home/>} />
                 <Route exact path="/login" element={<Login/>}/>
                 <Route exact path="/signup" element={<SignUp/>} />
+                <Route exact path="/profile" element={<Profile/>} />
             </Routes>
         </Router>
     );
