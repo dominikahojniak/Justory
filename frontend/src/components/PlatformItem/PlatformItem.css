@@ -1,0 +1,20 @@
+.platform-item {
+    margin-right: 10px;
+}
+.platform-image {
+    width: 45px;
+    height: 57px;
+}
+.options{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.options img {
+    width: 20px;
+    height: 20px;
+}
+@media (max-width: 900px) {
+    
+}

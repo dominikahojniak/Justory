@@ -8,6 +8,7 @@ import Profile from './pages/Profile.jsx';
 import Help from './pages/Help.jsx';
 import AboutUs from './pages/AboutUs.jsx';
 import Contact from './pages/Contact.jsx';
+import Book from './pages/Book.jsx';
 import axios from '../axiosConfig.js';
 const App = () => {
     // const [isLoggedIn,setIsLoggedIn] = useState(false);
@@ -42,6 +43,7 @@ const App = () => {
                 <Route exact path="/help" element={<Help />} />
                 <Route exact path="/aboutus" element={<AboutUs />} />
                 <Route exact path="/contact" element={<Contact />} />
+                <Route path="/book/:title" element={<Book />} />
             </Routes>
         </Router>
     );
