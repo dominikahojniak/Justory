@@ -1,50 +1,50 @@
 package com.justory.backend.mapper;
 
 
-import com.justory.backend.api.external.AuthorsDTO;
 import com.justory.backend.api.external.BooksDTO;
-import com.justory.backend.api.external.CategoriesDTO;
 import com.justory.backend.api.internal.Books;
-import com.justory.backend.api.internal.Authors;
-import com.justory.backend.api.internal.Categories;
 import com.justory.backend.service.FileUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.io.IOException;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Component
 public class BooksMapper {
+    @Autowired
+    private AuthorsMapper authorsMapper;
+
+    @Autowired
+    private CategoriesMapper categoriesMapper;
+
+    @Autowired
+    private PublishersMapper publishersMapper;
 
     public BooksDTO toDTO(Books book) {
         return new BooksDTO()
-                .setId(book.getId())
                 .setTitle(book.getTitle())
                 .setLanguage(book.getLanguage())
                 .setDescription(book.getDescription())
                 .setISBN(book.getISBN())
                 .setDate(book.getDate())
                 .setImg(FileUtils.readFileFromLocation(book.getImg()))
-                .setCategories(mapCategoriesToDTO(book.getCategories()))
-                .setAuthors(mapAuthorsToDTO(book.getAuthors()));
+                .setCategories(categoriesMapper.mapCategoriesToDTO(book.getCategories()))
+                .setAuthors(authorsMapper.mapAuthorsToDTO(book.getAuthors()))
+                .setPublisher(publishersMapper.toDTO(book.getPublisher()));
     }
 
-    private Set<CategoriesDTO> mapCategoriesToDTO(Set<Categories> categories) {
-        if (categories == null) {
-            return null;
-        }
-        return categories.stream()
-                .map(CategoriesMapper::toDTO)
-                .collect(Collectors.toSet());
+    public Books toEntity(BooksDTO bookDTO) {
+        String imgPath = "./uploads/books/" + bookDTO.getTitle() + ".jpg";
+        return new Books()
+                .setTitle(bookDTO.getTitle())
+                .setLanguage(bookDTO.getLanguage())
+                .setDescription(bookDTO.getDescription())
+                .setISBN(bookDTO.getISBN())
+                .setDate(bookDTO.getDate())
+                .setImg(imgPath)
+                .setAuthors(authorsMapper.mapAuthorsToEntity(bookDTO.getAuthors()))
+                .setCategories(categoriesMapper.mapCategoriesToEntity(bookDTO.getCategories()))
+                .setPublisher(publishersMapper.toEntity(bookDTO.getPublisher()));
+
     }
 
-    private Set<AuthorsDTO> mapAuthorsToDTO(Set<Authors> authors) {
-        if (authors == null) {
-            return null;
-        }
-        return authors.stream()
-                .map(AuthorsMapper::toDTO)
-                .collect(Collectors.toSet());
-    }
 }

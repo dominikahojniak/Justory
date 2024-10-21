@@ -1,14 +1,14 @@
 import React from 'react';
 import './PlatformItem.css';
-function PlatformItem({ platformImg, formatImg }) {
+const PlatformItem = ({ platformImg, formatName ,formatImg}) => {
     return (
         <div className="platform-item">
-            <img  className="platform-image" src={platformImg} alt="Platform Logo" />
+            <img src={`data:image/jpeg;base64,${platformImg}`} alt="platformImg" className="platform-logo"/>
             <div className="options">
-                <img src={formatImg} alt="Format Icon" />
+                <img src={`data:image/jpeg;base64,${formatImg}`} alt={formatName}/>
             </div>
         </div>
     );
-}
+};
 
 export default PlatformItem;

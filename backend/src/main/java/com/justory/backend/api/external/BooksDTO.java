@@ -20,4 +20,6 @@ public class BooksDTO {
     private byte[] img;
     private Set<AuthorsDTO> authors = new HashSet<>();
     private Set<CategoriesDTO> categories;
+    private PublishersDTO publisher;
+    private Set<BookAvailabilitiesDTO> availabilities;
 }

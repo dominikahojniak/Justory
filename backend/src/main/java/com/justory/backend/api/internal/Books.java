@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import java.time.LocalDate;
+import java.util.Objects;
 import java.util.Set;
 
 @Data
@@ -39,4 +40,22 @@ public class Books {
             inverseJoinColumns = @JoinColumn(name = "category_id")
     )
     private Set<Categories> categories;
+    @ManyToOne
+    @JoinColumn(name = "publisher_id")
+    private Publishers publisher;
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<BookAvailabilities> availabilities;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Books books = (Books) o;
+        return Objects.equals(id, books.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }

@@ -35,7 +35,15 @@ public class SecurityConfig {
                         .requestMatchers(
                                 HttpMethod.GET,
                                 "/api/users/**",
-                                "/api/books/**"
+                                "/api/books/**",
+                                "/api/access-types",
+                                "/api/platforms",
+                                "/api/formats"
+                        )
+                        .permitAll()
+                        .requestMatchers(
+                                HttpMethod.POST,
+                                "api/books/add"
                         )
                         .permitAll()
                         .anyRequest()

@@ -9,7 +9,6 @@ import axios from '../../axiosConfig.js';
 const Book = () => {
     const { title } = useParams();
     const [book, setBook] = useState(null);
-    const [availability, setAvailability] = useState([]);
     const [isAdded, setIsAdded] = useState(false);
     const [addError, setAddError] = useState("");
     useEffect(() => {
@@ -17,9 +16,6 @@ const Book = () => {
             try {
                 const response = await axios.get(`/api/books/title/${title}`);
                 setBook(response.data);
-                const availabilityResponse = await axios.get(`/api/availability/${id}`);
-                setAvailability(availabilityResponse.data);
-                console.log("Availability data:", availabilityResponse.data);
             } catch (error) {
                 console.error('Error fetching book data:', error);
             }
@@ -78,24 +74,29 @@ const Book = () => {
                         <p>ISBN: {book.isbn}</p>
                         <p>language: {book.language}</p>
                     </div>
+                    {/* Subscription Section */}
                     <div className="subscription">
                         <div className="news-title-container-book">
                             <div className="news-title-book">
-                            <h3>Subscription</h3>
+                                <h3>Subscription</h3>
                             </div>
                         </div>
                         <div className="items">
-                            {availability.map(item => (
-                                item.subscriptionRequired && (
+                            {book.availabilities && book.availabilities
+                                .filter(item => item.accessTypeName === "subscription")
+                                .map(item => (
                                     <PlatformItem
-                                        key={item.id}
-                                        platformImg={`data:image/jpeg;base64, ${item.platform.img}`}
-                                        formatImg={`data:image/jpeg;base64, ${item.format.img}`}
+                                        key={item.platformName + item.formatName}
+                                        platformImg={item.platformLogo}
+                                        formatName={item.formatName}
+                                        formatImg={item.formatLogo}
                                     />
-                                )
-                            ))}
+                                ))
+                            }
                         </div>
                     </div>
+
+                    {/* Purchase Section */}
                     <div className="buy">
                         <div className="news-title-container-book">
                             <div className="news-title-book">
@@ -103,15 +104,17 @@ const Book = () => {
                             </div>
                         </div>
                         <div className="items">
-                            {availability.map(item => (
-                                item.purchaseOption && (
+                            {book.availabilities && book.availabilities
+                                .filter(item => item.accessTypeName === "purchase")
+                                .map(item => (
                                     <PlatformItem
-                                        key={item.id}
-                                        platformImg={`data:image/jpeg;base64, ${item.platform.img}`}
-                                        formatImg={`data:image/jpeg;base64, ${item.format.img}`}
+                                        key={item.platformName + item.formatName}
+                                        platformImg={item.platformLogo}
+                                        formatName={item.formatName}
+                                        formatImg={item.formatLogo}
                                     />
-                                )
-                            ))}
+                                ))
+                            }
                         </div>
                     </div>
                     <div className="news-description-book">

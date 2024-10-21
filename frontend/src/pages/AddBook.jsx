@@ -1,0 +1,163 @@
+import React, { useState, useEffect } from 'react';
+import '../pages_css/addBook.css';
+import Footer from '../components/Footer/Footer.jsx';
+import Header from '../components/Header/Header.jsx';
+import AccessTypeComponent from "../components/accessTypes/AccessTypeComponent.jsx";
+import axios from '../../axiosConfig.js';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import InputFileUpload from "../components/InputFileUpload.jsx";
+import dayjs from 'dayjs';
+
+const AddBook = () => {
+    const [platforms, setPlatforms] = useState([]);
+    const [formats, setFormats] = useState([]);
+    const [accessTypes, setAccessTypes] = useState([]);
+    const [availability, setAvailability] = useState({});
+    const [title, setTitle] = useState('');
+    const [author, setAuthor] = useState('');
+    const [ISBN, setISBN] = useState('');
+    const [categories, setCategories] = useState('');
+    const [date, setDate] = useState(dayjs());
+    const [language, setLanguage] = useState('');
+    const [description, setDescription] = useState('');
+    const [publisher, setPublisher] = useState('');
+    const [file, setFile] = useState(null);
+    const [errors, setErrors] = useState({
+        title: false,
+        author: false,
+        language: false,
+        description: false,
+        ISBN: false,
+        file: false,
+    });
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const platformsResponse = await axios.get('/api/platforms');
+                const formatsResponse = await axios.get('/api/formats');
+                const accessTypesResponse = await axios.get('/api/access-types');
+
+                setPlatforms(platformsResponse.data);
+                setFormats(formatsResponse.data);
+                setAccessTypes(accessTypesResponse.data);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+
+        fetchData();
+    }, []);
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        if (errors.ISBN || errors.file || errors.title || errors.author || errors.language || errors.description) {
+            alert('Please fix validation errors.');
+            return;
+        }
+        if (!title || !author || !ISBN || !date || !language || !description || !file) {
+            alert('Please fill in all fields.');
+            return;
+        }
+
+
+        try {
+            const formData = new FormData();
+
+            formData.append('file', file);
+
+            const bookDTO = {
+                title: title,
+                authors: author.split(',').map(a => {
+                    const [firstName, lastName] = a.trim().split(' ');
+                    return { firstName, lastName };
+                }),
+                isbn: ISBN,
+                language: language,
+                description: description,
+                publisher: { name: publisher },
+                date: date.format('YYYY-MM-DD'),
+                categories: categories.split(',').map(c => ({ name: c.trim() })),
+                availabilities: Object.keys(availability).map(platformName => {
+                    return Object.keys(availability[platformName]).map(formatName => {
+                        return Object.keys(availability[platformName][formatName]).map(accessTypeName => {
+                            const platform = platforms.find(p => p.name === platformName);
+                            const format = formats.find(f => f.name === formatName);
+                            const accessType = accessTypes.find(a => a.name === accessTypeName);
+
+                            return {
+                                platformName: platform ? platform.name : 'Unknown platform',
+                                formatName: format ? format.name : 'Unknown format',
+                                accessTypeName: accessType ? accessType.name : 'Unknown access type'
+                            };
+                        });
+                    });
+                }).flat(2)
+            };
+
+            formData.append('bookDTO', JSON.stringify(bookDTO));
+
+
+            const token = localStorage.getItem('token');
+            if (!token) {
+                console.log('token:', token);
+                return;
+            }
+            const response = await axios.post('/api/books/add', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            console.log('Book added successfully:', response.data);
+            alert('Book added successfully');
+        } catch (error) {
+            console.error('Error adding book:', error);
+        }
+    };
+
+    return (
+        <div className="addbook-container">
+            <Header activePage="addbook" />
+            <main className='main-addbook'>
+                <div className="add">
+                    Add Book
+                </div>
+                <div className="addbook">
+                    <form className="form-addbook" onSubmit={handleSubmit}>
+                        <input name="title" type="text" placeholder="title" id="title" value={title} onChange={(e) => setTitle(e.target.value)} />
+                        <input name="author" type="text" placeholder="author (comma-separated)" id="author" value={author} onChange={(e) => setAuthor(e.target.value)} />
+                        <input name="ISBN" type="text" placeholder="ISBN" id="ISBN" value={ISBN} onChange={(e) => setISBN(e.target.value)} />
+                        <input name="categories" type="text" placeholder="categories (comma-separated)" id="categories" value={categories} onChange={(e) => setCategories(e.target.value)} />
+                        <input name="publisher" type="text" placeholder="publisher" id="publisher" value={publisher} onChange={(e) => setPublisher(e.target.value)} />
+                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                            <DatePicker
+                                label="Select date"
+                                value={date}
+                                onChange={(newValue) => setDate(newValue)}
+                                renderInput={(params) => <input {...params} />}
+                            />
+                        </LocalizationProvider>
+                        <input name="language" type="text" placeholder="language" id="language" value={language} onChange={(e) => setLanguage(e.target.value)} />
+                        <input name="description" type="text" placeholder="description" id="description" value={description} onChange={(e) => setDescription(e.target.value)} />
+                        <InputFileUpload onChange={(e) => setFile(e.target.files[0])} />
+                        <AccessTypeComponent
+                            platforms={platforms}
+                            formats={formats}
+                            accessTypes={accessTypes}
+                            availability={availability}
+                            setAvailability={setAvailability}
+                        />
+                        <button type="submit" id="add-button">ADD BOOK</button>
+                    </form>
+                </div>
+            </main>
+            <Footer />
+        </div>
+    );
+};
+
+export default AddBook;

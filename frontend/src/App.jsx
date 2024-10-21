@@ -9,6 +9,7 @@ import Help from './pages/Help.jsx';
 import AboutUs from './pages/AboutUs.jsx';
 import Contact from './pages/Contact.jsx';
 import Book from './pages/Book.jsx';
+import AddBook from './pages/AddBook.jsx';
 import axios from '../axiosConfig.js';
 const App = () => {
     // const [isLoggedIn,setIsLoggedIn] = useState(false);
@@ -35,7 +36,7 @@ const App = () => {
     return (
         <Router>
             <Routes>
-                <Route exact path="/" element={<Login/>} />
+                <Route exact path="/" element={<Home/>} />
                 <Route exact path="/home" element={<Home/>} />
                 <Route exact path="/login" element={<Login/>}/>
                 <Route exact path="/signup" element={<SignUp/>} />
@@ -44,6 +45,7 @@ const App = () => {
                 <Route exact path="/aboutus" element={<AboutUs />} />
                 <Route exact path="/contact" element={<Contact />} />
                 <Route path="/book/:title" element={<Book />} />
+                <Route exact path="/addbook" element={<AddBook />} />
             </Routes>
         </Router>
     );
