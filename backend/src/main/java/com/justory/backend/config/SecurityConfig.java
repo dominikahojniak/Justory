@@ -45,7 +45,7 @@ public class SecurityConfig {
                                 HttpMethod.POST,
                                 "api/books/add"
                         )
-                        .permitAll()
+                        .hasRole("ADMIN")
                         .anyRequest()
                         .authenticated())
                 .sessionManagement(sessionManagement -> sessionManagement

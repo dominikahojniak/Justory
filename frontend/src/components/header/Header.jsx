@@ -17,7 +17,7 @@ import addbook from '../../img/addbook.svg';
 import axios from '../../../axiosConfig.js';
 
 const Header = ({ activePage }) => {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(null);
     const [isAdmin, setIsAdmin] = useState(false);
 
     useEffect(() => {
@@ -29,7 +29,7 @@ const Header = ({ activePage }) => {
                     }
                 });
                 setIsLoggedIn(true);
-                setIsAdmin(response.data.role === 'admin');
+                setIsAdmin(response.data.role === 'ADMIN');
             } catch (error) {
                 setIsLoggedIn(false);
                 setIsAdmin(false);
@@ -38,7 +38,9 @@ const Header = ({ activePage }) => {
 
         fetchUserData();
     }, []);
-
+    if (isLoggedIn === null) {
+        return null;
+    }
     const isLogSignPage = activePage === 'logsign';
     const headerClass = isLogSignPage ? 'header-nav logsign-page' : 'header-nav';
     const isHomePage = activePage === 'home';

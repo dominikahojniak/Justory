@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Login from "./pages/Login.jsx";
@@ -11,28 +11,33 @@ import Contact from './pages/Contact.jsx';
 import Book from './pages/Book.jsx';
 import AddBook from './pages/AddBook.jsx';
 import axios from '../axiosConfig.js';
+import ProtectedRoute from "./components/ProtectedRoute.jsx";
 const App = () => {
-    // const [isLoggedIn,setIsLoggedIn] = useState(false);
-    // const [userRole, setUserRole] = useState('');
+    const [isLoggedIn,setIsLoggedIn] = useState(null);
+    const [userRole, setUserRole] = useState('');
 
-    // useEffect(() => {
-    //     const fetchUserProfile = async () => {
-    //         try {
-    //             const response = await axios.get('/api/users/profile', {
-    //                 headers: {
-    //                     Authorization: `Bearer ${localStorage.getItem('token')}`
-    //                 }
-    //             });
-    //             console.log(response.data.role);
-    //             setIsLoggedIn(true);
-    //             setUserRole(response.data.role);
-    //         } catch (error) {
-    //             console.error('Error fetching user profile:', error);
-    //         }
-    //     };
-    //
-    //     fetchUserProfile();
-    // }, []);
+    useEffect(() => {
+        const fetchUserProfile = async () => {
+            try {
+                const response = await axios.get('/api/users/profile', {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem('token')}`
+                    }
+                });
+                console.log(response.data.role);
+                setIsLoggedIn(true);
+                setUserRole(response.data.role);
+            } catch (error) {
+                console.error('Error fetching user profile:', error);
+                setIsLoggedIn(false);
+            }
+        };
+
+        fetchUserProfile();
+    }, []);
+    if (isLoggedIn === null) {
+        return null;
+    }
     return (
         <Router>
             <Routes>
@@ -45,7 +50,14 @@ const App = () => {
                 <Route exact path="/aboutus" element={<AboutUs />} />
                 <Route exact path="/contact" element={<Contact />} />
                 <Route path="/book/:title" element={<Book />} />
-                <Route exact path="/addbook" element={<AddBook />} />
+                <Route
+                    path="/addbook"
+                    element={
+                        <ProtectedRoute isAllowed={isLoggedIn && userRole === 'ADMIN'}>
+                            <AddBook />
+                        </ProtectedRoute>
+                    }
+                />
             </Routes>
         </Router>
     );
