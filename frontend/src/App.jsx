@@ -11,6 +11,7 @@ import Contact from './pages/Contact.jsx';
 import Book from './pages/Book.jsx';
 import AddBook from './pages/AddBook.jsx';
 import ToRead from './pages/ToRead.jsx';
+import Premieres from './pages/Premieres.jsx';
 import axios from '../axiosConfig.js';
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 const App = () => {
@@ -64,6 +65,7 @@ const App = () => {
                 ) : (
                     <Route exact path="/toRead" element={<Navigate to="/login" />} />
                 )}
+                <Route exact path="/premieres" element={<Premieres/>} />
             </Routes>
         </Router>
     );

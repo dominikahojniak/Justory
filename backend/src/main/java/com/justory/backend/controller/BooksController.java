@@ -11,7 +11,10 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.time.LocalDate;
+import java.time.YearMonth;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/books")
@@ -46,5 +49,18 @@ public class BooksController {
 
         return booksService.addBookWithAvailabilities(bookDTO, file);
 
+    }
+    @GetMapping("/premieres")
+    public List<BooksDTO> getPremieresForCurrentMonth() {
+        LocalDate currentDate = LocalDate.now();
+        YearMonth currentYearMonth = YearMonth.from(currentDate);
+        List<BooksDTO> allBooks = booksService.getAllBooks();
+        List<BooksDTO> premieresForCurrentMonth = allBooks.stream()
+                .filter(book -> {
+                    YearMonth premiereYearMonth = YearMonth.from(book.getDate());
+                    return premiereYearMonth.equals(currentYearMonth);
+                })
+                .collect(Collectors.toList());
+        return premieresForCurrentMonth;
     }
 }

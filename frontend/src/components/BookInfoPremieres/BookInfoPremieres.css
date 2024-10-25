@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300..900&display=swap');
+.news-container-premieres {
+    width: calc(100vw - 30rem);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 1px 1px #000000;
+}
+.news-image-premieres {
+    width: 120px;
+    height: 160px;
+    margin-bottom: 1%;
+}
+.right-premieres{
+    width: calc(100vw - 40rem);
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    margin-right: 1%;
+}
+.date {
+    margin-top: 0; 
+    color: #D2CBC1;
+    font-size: 40px;
+    font-family:'Frank Ruhl Libre', serif;
+    font-weight: 400;
+    height: auto;
+    width: 10rem;
+}
+.news-description-premieres  {
+    height: 160px;
+    display: flex;
+    align-items: flex-end;
+    width: auto;
+    justify-content: flex-end;
+    margin-right: 1%;
+}
+.news-description-premieres p {
+    color: #D2CBC1;
+    font-size: 20px;
+    font-family: 'Frank Ruhl Libre', serif;
+    font-weight: 400;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+@media (max-width: 900px) {
+    .news-container-premieres{
+        width: 100vw;
+    }
+    .news-description-premieres  {
+        margin-left: 0px;
+        height: 156px;
+    
+    }
+    .news-description-premieres p {
+        font-size: 14px;
+        margin-bottom: 0px;
+        text-align: center;
+    }
+    .date {
+        width: 45%;
+        font-size: 36px;
+        font-family:Grandstander;
+        font-weight: 600;
+       text-align: center;
+       display: flex;
+       align-self: flex-end;
+       margin-left: 1%;
+    }
+}
