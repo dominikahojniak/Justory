@@ -21,6 +21,7 @@ public class BooksMapper {
 
     public BooksDTO toDTO(Books book) {
         return new BooksDTO()
+                .setId(book.getId())
                 .setTitle(book.getTitle())
                 .setLanguage(book.getLanguage())
                 .setDescription(book.getDescription())

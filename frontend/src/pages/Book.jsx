@@ -16,6 +16,7 @@ const Book = () => {
             try {
                 const response = await axios.get(`/api/books/title/${title}`);
                 setBook(response.data);
+                console.log('Fetched book data:', response.data);
             } catch (error) {
                 console.error('Error fetching book data:', error);
             }
@@ -25,8 +26,12 @@ const Book = () => {
     }, [title]);
     const handleAddToReadList = async (e) => {
         e.preventDefault();
+        if (!book || !book.id) {
+            console.error('Book ID is undefined');
+            return;
+        }
         try {
-            await axios.post(`/api/toread/addbook/${id}`, {}, {
+            await axios.post(`/api/toread/addbook/${book.id}`, {}, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`
                 }

@@ -10,6 +10,7 @@ import AboutUs from './pages/AboutUs.jsx';
 import Contact from './pages/Contact.jsx';
 import Book from './pages/Book.jsx';
 import AddBook from './pages/AddBook.jsx';
+import ToRead from './pages/ToRead.jsx';
 import axios from '../axiosConfig.js';
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 const App = () => {
@@ -58,6 +59,11 @@ const App = () => {
                         </ProtectedRoute>
                     }
                 />
+                {isLoggedIn ? (
+                    <Route exact path="/toRead" element={<ToRead/>} />
+                ) : (
+                    <Route exact path="/toRead" element={<Navigate to="/login" />} />
+                )}
             </Routes>
         </Router>
     );
