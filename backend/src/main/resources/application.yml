@@ -19,6 +19,8 @@ spring:
   mvc:
     converters:
       preferred-json-mapper: jackson
+  jackson:
+    date-format: yyyy-MM-dd
   mail:
     host: smtp.gmail.com
     port: 587

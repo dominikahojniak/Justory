@@ -4,13 +4,29 @@ import '../pages_css/book.css';
 import Footer from '../components/Footer/Footer.jsx';
 import Header from '../components/Header/Header.jsx';
 import PlatformItem from '../components/PlatformItem/PlatformItem.jsx';
+import UserLocationIcon from '../img/locationIcon.png';
+import BookstoreIcon from '../img/bookstoreIcon.png';
 import X from '../img/goingBack.svg';
 import axios from '../../axiosConfig.js';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import 'leaflet/dist/leaflet.css';
+import L from 'leaflet';
+delete L.Icon.Default.prototype._getIconUrl;
+L.Icon.Default.mergeOptions({
+    iconRetinaUrl: BookstoreIcon,
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+});
+const userIcon = new L.Icon({
+    iconUrl: UserLocationIcon,
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+});
 const Book = () => {
     const { title } = useParams();
     const [book, setBook] = useState(null);
     const [isAdded, setIsAdded] = useState(false);
     const [addError, setAddError] = useState("");
+    const [userLocation, setUserLocation] = useState(null);
+    const [booksLocation, setBooksLocation] = useState([]);
     useEffect(() => {
         const fetchBookData = async () => {
             try {
@@ -24,6 +40,48 @@ const Book = () => {
 
         fetchBookData();
     }, [title]);
+    useEffect(() => {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    setUserLocation({
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude,
+                    });
+                },
+                (error) => {
+                    console.error("Error fetching current location:", error);
+                }
+            );
+        }
+    }, []);
+
+    useEffect(() => {
+        if (userLocation) {
+            fetchNearbyBooksLocation();
+        }
+    }, [userLocation]);
+
+    const fetchNearbyBooksLocation = async () => {
+        try {
+            const response = await axios.get('/api/booksLocations', {
+                params: {
+                    lat: userLocation.lat,
+                    lng: userLocation.lng,
+                    radius: 2500
+                }
+            });
+            setBooksLocation(response.data.elements.map((el) => ({
+                name: el.tags.name,
+                type: el.tags.amenity === "library" ? "Biblioteka" : "Księgarnia",
+                lat: el.lat,
+                lng: el.lon
+            })));
+        } catch (error) {
+            console.error("Error fetching bookstores data:", error);
+        }
+    };
+
     const handleAddToReadList = async (e) => {
         e.preventDefault();
         if (!book || !book.id) {
@@ -125,6 +183,25 @@ const Book = () => {
                     <div className="news-description-book">
                         <p>{book.description}</p>
                     </div>
+                    {userLocation && (
+                        <MapContainer center={userLocation} zoom={13} style={{ height: '400px', width: '90%' }}>
+                            <TileLayer
+                                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                            />
+                            <Marker position={userLocation} icon={userIcon}>
+                                <Popup>You're here!</Popup>
+                            </Marker>
+                            {booksLocation.map((store, index) => (
+                                <Marker key={index} position={[store.lat, store.lng]}>
+                                    <Popup>
+                                        <strong>{store.name}</strong>
+                                        <em>{store.type}</em>
+                                    </Popup>
+                                </Marker>
+                            ))}
+                        </MapContainer>
+                    )}
                 </div>
             </main>
             <Footer/>

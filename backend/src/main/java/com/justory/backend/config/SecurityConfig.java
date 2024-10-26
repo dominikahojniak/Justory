@@ -39,7 +39,8 @@ public class SecurityConfig {
                                 "/api/access-types",
                                 "/api/platforms",
                                 "/api/formats",
-                                "/api/toread/**"
+                                "/api/toread/**",
+                                "/api/booksLocations"
                         )
                         .permitAll()
                         .requestMatchers(
