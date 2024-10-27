@@ -1,0 +1,61 @@
+.category-books{
+    display: flex;
+    flex-wrap: wrap;
+    width: calc(100vw - 30rem);
+    height: auto;
+    gap: 1rem;
+    justify-content: flex-start;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1%;
+}
+.book-link{
+    box-sizing: border-box;
+    width: calc((100% - 4rem) / 5);
+    height: 280px;
+    text-decoration: none !important;
+    text-decoration-color: transparent;
+    margin-bottom: 1%;
+}
+.book-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: background-color 0.3s ease;
+    height: 280px;
+    overflow: hidden;
+}
+.book-item:hover {
+    background-color: #1A1A18;
+    color: #D2CBC1;
+}
+.book-item img.book-cover {
+   margin-top: 5%;
+    margin-bottom: 10%;
+}
+
+.book-item h3 {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 18px;
+    color: #D2CBC1;
+    margin-left: 2%;
+    margin-bottom: 0;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+}
+
+.book-item p {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 14px;
+    color: #D2CBC1;
+    text-align: center;
+    margin-left: 2%;
+    margin-top: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+}

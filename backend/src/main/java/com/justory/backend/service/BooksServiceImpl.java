@@ -142,5 +142,18 @@ public class BooksServiceImpl implements BooksService {
         Books savedBook = booksRepository.save(book);
         return booksMapper.toDTO(savedBook);
     }
-
+    @Override
+    public List<BooksDTO> searchBooks(String query) {
+        List<Books> searchResults = booksRepository.searchByTitleOrAuthor(query);
+        return searchResults.stream()
+                .map(booksMapper::toDTO)
+                .collect(Collectors.toList());
+    }
+    @Override
+    public List<BooksDTO> findBooksByCategory(String categoryName) {
+        Categories category = categoriesRepository.findByName(categoryName)
+                .orElseThrow(() -> new RuntimeException("Category not found"));
+        List<Books> books = booksRepository.findByCategoriesContaining(category);
+        return books.stream().map(booksMapper::toDTO).collect(Collectors.toList());
+    }
 }

@@ -12,6 +12,8 @@ import Book from './pages/Book.jsx';
 import AddBook from './pages/AddBook.jsx';
 import ToRead from './pages/ToRead.jsx';
 import Premieres from './pages/Premieres.jsx';
+import Search from './pages/Search.jsx';
+import CategoryBooks from './pages/CategoryBooks.jsx';
 import axios from '../axiosConfig.js';
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 const App = () => {
@@ -66,6 +68,8 @@ const App = () => {
                     <Route exact path="/toRead" element={<Navigate to="/login" />} />
                 )}
                 <Route exact path="/premieres" element={<Premieres/>} />
+                <Route exact path="/search" element={<Search/>} />
+                <Route exact path="/category/:categoryName" element={<CategoryBooks/>} />
             </Routes>
         </Router>
     );

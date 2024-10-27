@@ -10,4 +10,6 @@ public interface BooksService {
     BooksDTO getBookByTitle(String title);
     BooksDTO addBook(BooksDTO bookDTO);
     BooksDTO addBookWithAvailabilities(BooksDTO bookDTO, MultipartFile file);
+    List<BooksDTO> searchBooks(String query);
+    List<BooksDTO> findBooksByCategory(String categoryName);
 }

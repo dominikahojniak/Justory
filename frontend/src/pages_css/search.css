@@ -1,0 +1,127 @@
+@import url('https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300..900&display=swap');
+.search-container{
+    height: 100vh;
+    width: 100vw;
+    margin-top: 0;
+    overflow-y: auto;
+}
+.main-search {
+    margin-top: 10vh;
+    min-height: 80vh;
+    flex-shrink: 0;
+  }
+  
+  body {
+    background-color: #0B0C0B;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    margin: 0%;
+    min-height: 100vh;
+    overflow-y: auto;
+  }
+.categories-list {
+  width: calc(100vw - 30rem);
+  display: flex;
+  flex-direction: column;
+  margin: 1% auto 0;
+}
+.categories-list h3 {
+  text-align: center;
+  font-family: 'Frank Ruhl Libre', serif;
+  color: #D2CBC1;
+  font-weight: 400;
+  font-size: 24px;
+}
+.all-categories{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+.category-item {
+  font-family: 'Frank Ruhl Libre', serif;
+  padding: 10px 15px;
+  border: 1px solid  #6F7D09;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: 400;
+  color: #D2CBC1;
+  text-align: center;
+  cursor: pointer;
+  flex: 0 1 calc(25% - 10px);
+  box-sizing: border-box;
+  transition: background-color 0.3s ease;
+}
+
+.category-item:hover {
+  background-color:  #6F7D09;
+  color: #D2CBC1;
+}
+.search-items{
+  width: calc(100vw - 54vw);
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1%;
+  font-size: 24px;
+  color: #D2CBC1;
+  font-family: 'Frank Ruhl Libre', serif;
+  font-weight: 400;
+  justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  box-shadow: 0 1px 1px #000000;
+  padding-left: 1%;
+}
+  .search {
+    font-family: 'Frank Ruhl Libre', serif;
+    color: #D2CBC1;
+    font-weight: 400;
+    font-size: 40px;
+    text-align: center;
+    box-shadow: 0 1px 1px #000000;
+    width: calc(100vw - 30rem);
+    margin: 0 auto;
+  }
+.book-cover {
+  width: 120px;
+  height: 160px;
+}
+.cover-search{
+  margin-right: 1%;
+}
+
+.search-link {
+  text-decoration: none !important;
+}
+.search-item-container{
+  width: calc(100vw - 30rem);
+  margin: 0 auto;
+}
+  @media (max-width: 900px) {
+    body {
+      width: calc(100vw - 1px);
+    }
+    .search{
+        width: 100%;
+        margin: 0;
+    }
+    .main-search {
+      height: auto;
+      margin-bottom: calc(10vh + 10px);
+      margin-top: 5vh;
+      width: calc(100vw - 1px);
+    }
+    .search-items{
+      width: 100vw;
+    }
+    .search-item-container{
+      width: 100vw;
+      margin: 0 auto;
+    }
+  }
