@@ -1,0 +1,59 @@
+.access-type-component{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.platform {
+    margin-bottom: 1rem;
+}
+.platform-title{
+    font-family: 'Frank Ruhl Libre', serif;
+    color: #D2CBC1;
+    font-size: 24px;
+    margin-bottom: 0.5rem;
+}
+.formats-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.format-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.format-title {
+    color: #D2CBC1;
+    margin-bottom: 0.3rem;
+}
+
+.access-types {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.access-type-item {
+    display: flex;
+    align-items: center;
+    color: #D2CBC1;
+}
+
+.access-type-item input[type="checkbox"] {
+    margin-right: 0.3rem;
+    color: #6F7D09;
+}
+.access-type-item input[type="checkbox"]:checked {
+    background-color: #6F7D09;
+    border-color: #6F7D09;
+}
+.access-type-item label {
+    color: #D2CBC1;
+    transition: color 0.3s ease;
+}
+
+.access-type-item input[type="checkbox"]:checked + label {
+    color: #6F7D09;
+}

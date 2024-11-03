@@ -134,12 +134,14 @@ const AddBook = () => {
                         <input name="categories" type="text" placeholder="categories (comma-separated)" id="categories" value={categories} onChange={(e) => setCategories(e.target.value)} />
                         <input name="publisher" type="text" placeholder="publisher" id="publisher" value={publisher} onChange={(e) => setPublisher(e.target.value)} />
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
-                            <DatePicker
-                                label="Select date"
-                                value={date}
-                                onChange={(newValue) => setDate(newValue)}
-                                renderInput={(params) => <input {...params} />}
-                            />
+                            <div className="date-picker-container">
+                                <DatePicker
+                                    label="Select date"
+                                    value={date}
+                                    onChange={(newValue) => setDate(newValue)}
+                                    renderInput={(params) => <input {...params} />}
+                                />
+                            </div>
                         </LocalizationProvider>
                         <input name="language" type="text" placeholder="language" id="language" value={language} onChange={(e) => setLanguage(e.target.value)} />
                         <input name="description" type="text" placeholder="description" id="description" value={description} onChange={(e) => setDescription(e.target.value)} />

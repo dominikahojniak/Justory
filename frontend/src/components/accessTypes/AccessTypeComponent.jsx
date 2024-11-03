@@ -25,6 +25,7 @@ const AccessTypeComponent = ({ platforms, formats, accessTypes, availability, se
             {platforms.map((platform) => (
                 <div key={platform.name} className="platform">
                     <div className="platform-title">{platform.name}</div>
+                    <div className="formats-container">
                     {formats.map((format) => (
                         <div key={format.name} className="format-item">
                             <div className="format-title">{format.name}</div>
@@ -41,6 +42,7 @@ const AccessTypeComponent = ({ platforms, formats, accessTypes, availability, se
                             ))}
                         </div>
                     ))}
+                </div>
                 </div>
             ))}
         </div>

@@ -56,16 +56,39 @@ body {
     position: relative;
     z-index: 1;
 }
-#author,#title,#ISBN, #date,#language,#description{
+#author,#title,#ISBN, #date,#language,#description, #publisher, #categories{
     background-color:#D2CBC1;
     opacity: 0.55;
     width: 24vw;
     height: 7vh;
 }
-#title::placeholder, #author::placeholder,#ISBN::placeholder , #date::placeholder, #language::placeholder, #description::placeholder {
+#title::placeholder, #author::placeholder,#ISBN::placeholder , #date::placeholder, #language::placeholder, #description::placeholder, #publisher::placeholder, #categories::placeholder {
     color:#0A0805;
     font-family:'Roboto', serif;
     font-size:24px;
+}
+.date-picker-container {
+    background-color: #D2CBC1;
+    opacity: 0.55;
+    width: 24.3vw;
+    height: 7vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    box-sizing: border-box;
+    padding: 0.5rem;
+}
+.custom-date-picker input {
+    background-color: #D2CBC1; /* Jasne tło */
+    opacity: 0.55;
+    width: 24vw;
+    height: 7vh;
+    border: none;
+    font-size: 24px;
+    font-family: 'Roboto', serif;
+    color: #0A0805;
+    text-align: center;
 }
 #add-button{
     background-color: #4D5038;
