@@ -21,7 +21,7 @@ public class Books {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String title;
-    @ManyToMany(cascade = { CascadeType.ALL })
+    @ManyToMany
     @JoinTable(
             name = "books_authors",
             joinColumns = @JoinColumn(name = "book_id"),
@@ -45,7 +45,8 @@ public class Books {
     private Publishers publisher;
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<BookAvailabilities> availabilities;
-
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<UserToReadList> userToReadListEntries;
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

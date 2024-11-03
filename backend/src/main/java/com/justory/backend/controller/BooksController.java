@@ -7,7 +7,9 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.justory.backend.api.external.BooksDTO;
 import com.justory.backend.service.BooksService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -49,6 +51,15 @@ public class BooksController {
 
         return booksService.addBookWithAvailabilities(bookDTO, file);
 
+    }
+    @DeleteMapping("/delete/{bookId}")
+    public ResponseEntity<?> deleteBook(@PathVariable Integer bookId) {
+        try {
+            booksService.deleteBookById(bookId);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error deleting book");
+        }
     }
     @GetMapping("/premieres")
     public List<BooksDTO> getPremieresForCurrentMonth() {

@@ -69,16 +69,16 @@ body{
     justify-content: center;
     flex-direction: column;
 }
-#add-button{
-    color: #D2CBC1;
-    background-color: #596312;
-    font-family: 'Frank Ruhl Libre', serif;
-    font-size:20px;
-    width: 189px;
-    height: 67px;
-    border-radius: 7px;
-    margin-top: 0px;
+#addToRead-button{
+    color: #0A0805;
+    background-color: #4D5038;
+    font-family:'Frank Ruhl Libre',serif;
     border: none;
+    border-radius: 0px;
+    font-size:24px;
+    width: 24vw;
+    height: 7vh;
+    margin-top: 0vh;
 }
 .good-result{
     font-family: 'Frank Ruhl Libre', serif;
@@ -88,6 +88,17 @@ body{
     margin-top: 10px;
     font-family: 'Frank Ruhl Libre', serif;
     color: #b42222;
+}
+#delete-button{
+    color: #0A0805;
+    background-color: #521111;
+    font-family:'Frank Ruhl Libre',serif;
+    border: none;
+    border-radius: 0px;
+    font-size:24px;
+    width: 24vw;
+    height: 7vh;
+    margin-top: 10vh;
 }
 .main-book >.right{
     width: calc(7 * 100vw / 12);

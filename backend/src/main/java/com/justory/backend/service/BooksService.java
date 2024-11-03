@@ -12,4 +12,5 @@ public interface BooksService {
     BooksDTO addBookWithAvailabilities(BooksDTO bookDTO, MultipartFile file);
     List<BooksDTO> searchBooks(String query);
     List<BooksDTO> findBooksByCategory(String categoryName);
+    void deleteBookById(Integer bookId);
 }

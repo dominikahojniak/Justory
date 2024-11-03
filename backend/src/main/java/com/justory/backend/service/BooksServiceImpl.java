@@ -7,12 +7,13 @@ import com.justory.backend.api.internal.*;
 import com.justory.backend.mapper.BookAvailabilitiesMapper;
 import com.justory.backend.mapper.BooksMapper;
 import com.justory.backend.repository.*;
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -117,6 +118,20 @@ public class BooksServiceImpl implements BooksService {
         savedBook.setAvailabilities(availabilities);
 
         return booksMapper.toDTO(savedBook);
+    }
+    @Override
+    @Transactional
+    public void deleteBookById(Integer bookId) {
+        Books book = null;
+        try {
+            book = booksRepository.findById(bookId)
+                    .orElseThrow(() -> new Exception("Book with ID: " + bookId + " not founded."));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        book.getUserToReadListEntries().size();
+
+        booksRepository.delete(book);
     }
 
     @Override

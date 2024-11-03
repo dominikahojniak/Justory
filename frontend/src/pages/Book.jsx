@@ -11,6 +11,7 @@ import axios from '../../axiosConfig.js';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
+
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
     iconRetinaUrl: BookstoreIcon,
@@ -20,6 +21,7 @@ const userIcon = new L.Icon({
     iconUrl: UserLocationIcon,
     shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
 });
+
 const Book = () => {
     const { title } = useParams();
     const [book, setBook] = useState(null);
@@ -27,6 +29,29 @@ const Book = () => {
     const [addError, setAddError] = useState("");
     const [userLocation, setUserLocation] = useState(null);
     const [booksLocation, setBooksLocation] = useState([]);
+    const [isLoggedIn, setIsLoggedIn] = useState(null);
+    const [isAdmin, setIsAdmin] = useState(false);
+    const [addResponseDeleted, setAddResponseDeleted] = useState("");
+
+    useEffect(() => {
+        const fetchUserData = async () => {
+            try {
+                const response = await axios.get('/api/users/profile', {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem('token')}`
+                    }
+                });
+                setIsLoggedIn(true);
+                setIsAdmin(response.data.role === 'ADMIN');
+            } catch (error) {
+                setIsLoggedIn(false);
+                setIsAdmin(false);
+            }
+        };
+
+        fetchUserData();
+    }, []);
+
     useEffect(() => {
         const fetchBookData = async () => {
             try {
@@ -108,6 +133,24 @@ const Book = () => {
     if (!book) {
         return <div>Loading...</div>;
     }
+    const handleDeleteBook = async (e) => {
+        e.preventDefault();
+        if (!book || !book.id) {
+            console.error('Book ID is undefined');
+            return;
+        }
+        try {
+            await axios.delete(`/api/books/delete/${book.id}`, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`
+                }
+            });
+            setAddResponseDeleted("Deleted permanently from app");
+        } catch (error) {
+            console.error('Error deleting book:', error);
+        }
+    };
+
     return (
         <div className='book-container'>
             <Header activePage="book" />
@@ -122,9 +165,18 @@ const Book = () => {
                         <img className="news-image-book" src={`data:image/jpeg;base64,${book.img}`} alt="Book Cover"/>
                     </div>
                     <form className="form-book">
-                        {!isAdded && <button id="add-button" onClick={handleAddToReadList}>+ To Read</button>}
-                        {isAdded && <div className="good-result">Book added to read list!</div>}
-                        {addError && <div className="bad-result">{addError}</div>}
+                        {isLoggedIn && (
+                            <>
+                                {!isAdded && <button id="addToRead-button" onClick={handleAddToReadList}>+ To Read</button>}
+                                {isAdded && <div className="good-result">Book added to read list!</div>}
+                                {addError && <div className="bad-result">{addError}</div>}
+                                {isAdmin && (
+                                    <button id="delete-button" onClick={handleDeleteBook}>Delete Book</button>
+
+                                )}
+                                {addResponseDeleted && <div className="bad-result">{addResponseDeleted}</div>}
+                            </>
+                        )}
                     </form>
                 </div>
                 <div className="right">
