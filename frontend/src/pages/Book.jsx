@@ -136,11 +136,15 @@ const Book = () => {
                         <p>date: {new Date(book.date).toLocaleDateString()}</p>
                         <p>ISBN: {book.isbn}</p>
                         <p>language: {book.language}</p>
+                        <p>publisher: {book.publisher && book.publisher.name}</p>
+                        <p>categories: {book.categories && book.categories.map(category => (
+                            <span key={category.id}>{category.name}</span>
+                        )).reduce((prev, curr) => [prev, ', ', curr])}</p>
                     </div>
                     {/* Subscription Section */}
                     <div className="subscription">
                         <div className="news-title-container-book">
-                            <div className="news-title-book">
+                        <div className="news-title-book">
                                 <h3>Subscription</h3>
                             </div>
                         </div>

@@ -45,7 +45,7 @@ function ToRead() {
                     key={book.id}
                     id={book.id}
                     title={book.title}
-                    author={book.author}
+                    authors={book.authors}
                     imageSrc={`data:image/jpeg;base64, ${book.img}`}
                     removeBook={removeBook}
                 />
