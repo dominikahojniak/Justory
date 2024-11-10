@@ -6,6 +6,7 @@
 }
 
 .news-container-toread{
+    height: 200px;
     display: flex;
     align-items: flex-start;
     box-shadow: 0 1px 1px #000000;
@@ -15,6 +16,10 @@
 .remove-button{
     top: 30%;
     right: 1rem; 
+}
+.rating-section{
+    margin-top: 3%;
+    margin-right: 5%;
 }
 .news-description-toread {
     margin-left: 1%;
@@ -52,6 +57,7 @@
     margin-top: 0px;
     border: none;
 }
+
 @media (max-width: 900px) {
     .news-container-toread > img{
         width: 100px;
