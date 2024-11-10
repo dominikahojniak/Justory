@@ -29,6 +29,9 @@ const Profile = () => {
         localStorage.removeItem('token');
         navigate('/login');
     };
+    const handleSeeRatedBooks = () => {
+        navigate('/ratedBooks');
+    };
     return (
         <div className='profile-container'>
             <Header activePage="profile" />
@@ -41,6 +44,9 @@ const Profile = () => {
                         <div className="name-profile">{userProfile.name}</div>
                         <div className="email-profile">{userProfile.email}</div>
                         <div className="email-profile">{userProfile.phone}</div>
+                        <button onClick={handleSeeRatedBooks} className="rated-books-button">
+                            See Rated Books
+                        </button>
                         <button onClick={handleLogout} className="logout-profile">Log out</button>
                     </div>
                 )}
