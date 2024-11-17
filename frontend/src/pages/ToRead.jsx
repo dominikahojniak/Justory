@@ -6,8 +6,10 @@ import BookInfoToRead from '../components/BookInfoToRead/BookInfoToRead.jsx';
 import axios from '../../axiosConfig.js';
 function ToRead() {
     const [toReadBooks, setToReadBooks] = useState([]);
+    const [userRatings, setUserRatings] = useState([]);
     useEffect(() => {
         fetchToReadBooks();
+        fetchUserRatings();
     }, []);
 
     const fetchToReadBooks = async () => {
@@ -20,6 +22,18 @@ function ToRead() {
             setToReadBooks(response.data);
         } catch (error) {
             console.error('Error fetching ToRead books:', error);
+        }
+    };
+    const fetchUserRatings = async () => {
+        try {
+            const response = await axios.get('/api/book-rating/user-ratings', {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`
+                }
+            });
+            setUserRatings(response.data);
+        } catch (error) {
+            console.error('Error fetching user ratings:', error);
         }
     };
     const removeBook = async (bookId) => {
@@ -37,24 +51,30 @@ function ToRead() {
     return (
     <div className='toread-container'>
     <Header activePage="toRead" />
-      <main className='main-toread'>
-        <div className="toRead">ToRead</div>
-        <div className="news-toread">
-            {toReadBooks.map((book) => (
-                <BookInfoToRead
-                    key={book.id}
-                    id={book.id}
-                    title={book.title}
-                    authors={book.authors}
-                    imageSrc={`data:image/jpeg;base64, ${book.img}`}
-                    removeBook={removeBook}
-                />
-            ))}
-        </div>
-      </main>
-      <Footer showProfileAndHello={false}/>
+        <main className='main-toread'>
+            <div className="toRead">ToRead</div>
+            <div className="news-toread">
+                {toReadBooks.map((book) => {
+                    const ratingObj = userRatings.find(rating => rating.book.id === book.id);
+                    const rating = ratingObj ? ratingObj.rating : null;
+                    return (
+                        <BookInfoToRead
+                            key={book.id}
+                            id={book.id}
+                            title={book.title}
+                            authors={book.authors}
+                            imageSrc={`data:image/jpeg;base64, ${book.img}`}
+                            removeBook={removeBook}
+                            rating={rating}
+                            fetchUserRatings={fetchUserRatings}
+                        />
+                    );
+                })}
+            </div>
+        </main>
+        <Footer showProfileAndHello={false}/>
     </div>
-  );
+    );
 }
 
 export default ToRead;
