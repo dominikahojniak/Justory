@@ -42,7 +42,9 @@ public class SecurityConfig {
                                 "/api/toread/**",
                                 "/api/booksLocations",
                                 "/api/search",
-                                "/api/categories/**"
+                                "/api/categories/**",
+                                "/api/recommendations",
+                                "/api/book-rating/**"
                         )
                         .permitAll()
                         .requestMatchers(
@@ -50,6 +52,10 @@ public class SecurityConfig {
                                 "api/books/add"
                         )
                         .hasRole("ADMIN")
+                        .requestMatchers(
+                                HttpMethod.DELETE,
+                                "api/books/delete/**"
+                        ).hasRole("ADMIN")
                         .anyRequest()
                         .authenticated())
                 .sessionManagement(sessionManagement -> sessionManagement

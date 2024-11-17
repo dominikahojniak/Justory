@@ -8,6 +8,9 @@ import axios from '../../axiosConfig.js';
 const Home = () => {
     const [username, setUsername] = useState("");
     const [books, setBooks] = useState([]);
+    const [recommendedBooks, setRecommendedBooks] = useState([]);
+    const [isLoggedIn, setIsLoggedIn] = useState(null);
+
     useEffect(() => {
 
         const fetchUserData = async () => {
@@ -18,8 +21,10 @@ const Home = () => {
                     }
                 });
                 setUsername(response.data.name);
+                setIsLoggedIn(true);
             } catch (error) {
                 console.error('Error fetching user data:', error);
+                setIsLoggedIn(false);
             }
         };
 
@@ -34,6 +39,23 @@ const Home = () => {
         };
 
         fetchAllBooks();
+
+        const fetchRecommendedBooks = async () => {
+            try {
+                const response = await axios.get('/api/recommendations', {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem('token')}`
+                    }
+                });
+                setRecommendedBooks(response.data);
+            } catch (error) {
+                console.error('Error fetching recommended books:', error);
+            }
+        };
+
+        if (localStorage.getItem('token')) {
+            fetchRecommendedBooks();
+        }
     }, []);
 
     return (
@@ -52,6 +74,22 @@ const Home = () => {
                         <HomeBook key={book.id} id={book.id} imageSrc={`data:image/jpeg;base64, ${book.img}`} title={book.title} />
                     ))}
                 </div>
+                {isLoggedIn && (
+                    <>
+                        <div className="catalog">
+                            Recommendations
+                        </div>
+                        {recommendedBooks.length > 0 ? (
+                            <div className="news">
+                                {recommendedBooks.map((book) => (
+                                    <HomeBook key={book.id} id={book.id} imageSrc={`data:image/jpeg;base64,${book.img}`} title={book.title} />
+                                ))}
+                            </div>
+                        ) : (
+                            <p className="no-recommendations">You currently have no recommendations. Please rate some books or add books to your To Read list.</p>
+                        )}
+                    </>
+                )}
             </main>
             <Footer showProfileAndHello={true} username={username}/>
         </div>
