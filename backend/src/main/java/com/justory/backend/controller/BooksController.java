@@ -58,7 +58,7 @@ public class BooksController {
             booksService.deleteBookById(bookId);
             return ResponseEntity.ok().build();
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error deleting book");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error deleting book" + e.getMessage());
         }
     }
     @GetMapping("/premieres")

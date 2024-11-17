@@ -47,6 +47,8 @@ public class Books {
     private Set<BookAvailabilities> availabilities;
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<UserToReadList> userToReadListEntries;
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<BookRating> bookRatings;
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
