@@ -15,9 +15,9 @@
 .news-container-homebook a,
 .news-container-homebook a:link,
 .news-container-homebook a:visited,
-.news-container-homebook a:hover,
 .news-container-homebook a:active {
     text-decoration: none !important;
+
 }
 .news-description-homebook {
     height: 60px;
@@ -29,7 +29,7 @@
 }
 .news-description-homebook h3 {
     margin-top: 5px;
-    color: #D2CBC1;
+    color: #efebe5;
     font-size: 20px;
     font-family: 'Frank Ruhl Libre', serif;
     font-weight: 400;

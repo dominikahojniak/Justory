@@ -9,7 +9,7 @@
     height: 200px;
     display: flex;
     align-items: flex-start;
-    box-shadow: 0 1px 1px #000000;
+    border-bottom: 1px solid #191b1c;
     justify-content: space-between;
 }
 
@@ -28,14 +28,14 @@
 .news-description-toread h3 {
     margin-top: 0;
     margin-bottom: 0; 
-    color: #D2CBC1;
+    color: #efebe5;
     font-size: 30px;
     font-family:'Frank Ruhl Libre', serif;
     font-weight: 400;
 }
 .news-description-toread p {
     margin-top: 0;
-    color: #D2CBC1;
+    color: #efebe5;
     font-size: 20px;
     font-family:'Frank Ruhl Libre', serif;
     font-weight: 400;
@@ -45,18 +45,8 @@
     display: flex;
     align-items: center;
 }
-#remove-button{
-    color: #0B0C0B;
-    background-color: #521111;
-    font-family:'Frank Ruhl Libre', serif;
-    font-weight: 500;
-    font-size:20px;
-    width: 189px;
-    height: 67px;
-    border-radius: 0px;
-    margin-top: 0px;
-    border: none;
-}
+
+
 
 @media (max-width: 900px) {
     .news-container-toread > img{

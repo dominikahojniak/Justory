@@ -21,7 +21,7 @@
 }
 .main-book{
     margin-top: 10vh;
-    min-height: 80vh;
+    min-height: 85vh;
     flex-shrink: 0;
     flex: 1;
     display: flex;
@@ -29,7 +29,7 @@
     flex-shrink: 0;
 }
 body{
-    background-color: #0B0C0B;
+    background-color: #2B2D30;
     width:100vw;
     height: 100vh;
     display: flex;
@@ -71,18 +71,18 @@ body{
 }
 #addToRead-button{
     color: #0A0805;
-    background-color: #4D5038;
+    background-color: #547838;
     font-family:'Frank Ruhl Libre',serif;
     border: none;
     border-radius: 0px;
     font-size:24px;
-    width: 24vw;
+    width: 20vw;
     height: 7vh;
     margin-top: 0vh;
 }
 .good-result{
     font-family: 'Frank Ruhl Libre', serif;
-    color: #596312;
+    color: #547838;
 }
 .bad-result{
     margin-top: 10px;
@@ -91,12 +91,12 @@ body{
 }
 #delete-button{
     color: #0A0805;
-    background-color: #521111;
+    background-color: #bc2121;
     font-family:'Frank Ruhl Libre',serif;
     border: none;
     border-radius: 0px;
     font-size:24px;
-    width: 24vw;
+    width: 20vw;
     height: 7vh;
     margin-top: 10vh;
 }
@@ -108,6 +108,7 @@ body{
     flex-direction: column;
     flex-shrink: 0;
     margin-top: 1%;
+    margin-bottom: 1%;
 }
 .news-image-book {
     width: 15rem;
@@ -117,18 +118,18 @@ body{
     margin-left: 0px;
     margin-right: 0px;
     width: 95%;
-    height: 20%;
+    height: auto;
 }
 .news-description-book h3 {
     margin-top: 0;
     margin-bottom: 0;
-    color: #D2CBC1;
+    color: #efebe5;
     font-size: 40px;
     font-family: 'Frank Ruhl Libre', serif;
     font-weight: 400;
 }
 .news-description-book p {
-    color: #D2CBC1;
+    color: #efebe5;
     font-size: 18px;
     font-family: 'Frank Ruhl Libre', serif;
     font-weight: 400;
@@ -143,7 +144,7 @@ body{
     flex-direction: row;
     gap: 2rem;
     margin-bottom: 10px;
-    box-shadow: 0 1px 1px #000000;
+    border-bottom: 1px solid #191b1c;
     overflow-x: auto;
     align-items: flex-end;
     flex-shrink: 0;
@@ -163,7 +164,7 @@ body{
     flex-direction: row;
     gap: 2rem;
     margin-bottom: 10px;
-    box-shadow: 0 1px 1px #000000;
+    border-bottom: 1px solid #191b1c;
     align-items: flex-end;
     overflow-x: auto;
     flex-shrink: 0;
@@ -181,7 +182,7 @@ body{
 .news-title-book h3 {
     margin-top: 0;
     margin-bottom: 5px;
-    color: #D2CBC1;
+    color: #efebe5;
     font-size: 20px;
     font-family: 'Frank Ruhl Libre', serif;
     font-weight: 400;

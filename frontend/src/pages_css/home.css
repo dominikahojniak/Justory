@@ -3,7 +3,7 @@
 /*srodek*/
 main{
     margin-top: 10vh;
-    min-height: 80vh;
+    min-height: 85vh;
 }
 #home-page.home-container {
     height: 100vh;
@@ -12,19 +12,19 @@ main{
     position: fixed;
     left: 0;
     text-decoration: none ;
+    overflow-y: auto;
 }
 #root{
     height: 100vh;
 }
 body{
-    background-color: #0B0C0B;
+    background-color: #2B2D30;
     width:100vw;
     height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: start;
     align-items: center;
-    flex-direction: column;
     margin: 0%;
     min-height: 100vh;
     overflow-y: auto;
@@ -34,40 +34,45 @@ body{
     margin-top: 2%;
 }
 .description h3{
-    color: #D2CBC1;
+    color: #efebe5;
     font-family: 'Frank Ruhl Libre', serif;
     font-weight: 500;
     font-size:40px;
 }
 .description p{
     font-family: 'Frank Ruhl Libre', serif;
-    color: #D2CBC1;
+    color: #efebe5;
     font-size:24px;
     font-weight: 200;
 }
 .catalog{
     font-family: 'Frank Ruhl Libre', serif;
-    color: #D2CBC1;
+    color: #efebe5;
     font-weight: 400;
     font-size:40px;
     text-align: center;
-    box-shadow: 0 1px 1px #000000;
+    border-bottom: 1px solid #191b1c;
     width: calc(100vw - 30rem);
     margin: 0 auto;
 }
 .news{
     display: flex;
     width: calc(100vw - 30rem);
-    height: 32vh;
+    height: 250px;
     gap: 1rem;
     flex-direction: row;
     justify-content: flex-start;
     overflow-x: auto;
     white-space: nowrap;
-    margin-top: 1%;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 1% auto 2%;
     text-decoration: none ;
+}
+.no-recommendations{
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size:18px;
+    font-weight: 300;
+    display: flex;
+    justify-content: center;
 }
 
 /*stopka*/
@@ -81,14 +86,14 @@ body{
         margin-top: 25%;
     }
     .description h3{
-        color: #D2CBC1;
+        color: #efebe5;
         font-family: 'Frank Ruhl Libre', serif;
         font-weight: 500;
         font-size:24px;
     }
     .description p{
         font-family: 'Frank Ruhl Libre', serif;
-        color: #D2CBC1;
+        color: #efebe5;
         font-size:20px;
         font-weight: 200;
     }

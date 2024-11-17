@@ -8,7 +8,7 @@
 }
 .platform-title{
     font-family: 'Frank Ruhl Libre', serif;
-    color: #D2CBC1;
+    color: #efebe5;
     font-size: 24px;
     margin-bottom: 0.5rem;
 }
@@ -25,7 +25,7 @@
 }
 
 .format-title {
-    color: #D2CBC1;
+    color: #efebe5;
     margin-bottom: 0.3rem;
 }
 
@@ -38,22 +38,22 @@
 .access-type-item {
     display: flex;
     align-items: center;
-    color: #D2CBC1;
+    color: #efebe5;
 }
 
 .access-type-item input[type="checkbox"] {
     margin-right: 0.3rem;
-    color: #6F7D09;
+    color: #547838;
 }
 .access-type-item input[type="checkbox"]:checked {
-    background-color: #6F7D09;
-    border-color: #6F7D09;
+    background-color: #547838;
+    border-color: #547838;
 }
 .access-type-item label {
-    color: #D2CBC1;
+    color: #efebe5;
     transition: color 0.3s ease;
 }
 
 .access-type-item input[type="checkbox"]:checked + label {
-    color: #6F7D09;
+    color: #547838;
 }

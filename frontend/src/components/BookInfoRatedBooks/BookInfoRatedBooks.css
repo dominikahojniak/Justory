@@ -9,7 +9,7 @@
     height: 200px;
     display: flex;
     align-items: flex-start;
-    box-shadow: 0 1px 1px #000000;
+    border-bottom: 1px solid #191b1c;
     justify-content: space-between;
 }
 
@@ -25,19 +25,36 @@
 .rated-book-description h3 {
     margin-top: 0;
     margin-bottom: 0;
-    color: #D2CBC1;
+    color: #efebe5;
     font-size: 30px;
     font-family:'Frank Ruhl Libre', serif;
     font-weight: 400;
 }
 .rated-book-description p {
     margin-top: 0;
-    color: #D2CBC1;
+    color: #efebe5;
     font-size: 20px;
     font-family:'Frank Ruhl Libre', serif;
     font-weight: 400;
 }
-
+.remove-rating-button{
+    font-size:20px;
+    height: 60px;
+    border-radius: 0px;
+    margin-top: 2.6vh !important;
+    min-width: 20px !important;
+    border: none !important;
+    color: #bc2121 !important;
+}
+.MuiRating-iconFilled {
+    color: #ffee33 !important;
+}
+.MuiRating-iconEmpty {
+    color: #efebe5 !important;
+}
+.remove-rating-button:hover {
+    background-color: #2B2D30;
+}
 
 @media (max-width: 900px) {
     .rated-book-container > img{

@@ -1,18 +1,17 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import './BookInfoToRead.css';
 import {Link} from 'react-router-dom';
 import Rating from '@mui/material/Rating';
+import Button from '@mui/material/Button';
+import DeleteIcon from '@mui/icons-material/Delete';
 import axios from '../../../axiosConfig.js';
 
-const BookInfoToRead = ({id, title, authors = [], imageSrc, removeBook}) => {
-    const [rating, setRating] = useState(null);
+const BookInfoToRead = ({id, title, authors = [], imageSrc, removeBook, rating, fetchUserRatings}) => {
     const handleRemove = (e) => {
         e.preventDefault();
         removeBook(id);
     };
     const handleRatingChange = async (event, newRating) => {
-        setRating(newRating);
-
         try {
             const token = localStorage.getItem('token');
             await axios.post(`/api/book-rating/${id}`, null, {
@@ -24,6 +23,7 @@ const BookInfoToRead = ({id, title, authors = [], imageSrc, removeBook}) => {
                 },
             });
             console.log(`Book ${id} rated with ${newRating} stars.`);
+            fetchUserRatings();
         } catch (error) {
             console.error('Error saving rating:', error);
         }
@@ -44,13 +44,16 @@ const BookInfoToRead = ({id, title, authors = [], imageSrc, removeBook}) => {
                     name={`rating-${id}`}
                     value={rating}
                     onChange={handleRatingChange}
+                    readOnly={rating !== null}
                 />
             </div>
-            <div className="remove-button">
-                <form className="form-toread" onSubmit={handleRemove}>
-                    <button type="submit" id="remove-button" name="remove_button">- Remove</button>
-                </form>
-            </div>
+            <Button
+                variant="outlined"
+                startIcon={<DeleteIcon />}
+                onClick={handleRemove}
+                className="remove-rating-button"
+            >
+            </Button>
         </div>
     );
 }

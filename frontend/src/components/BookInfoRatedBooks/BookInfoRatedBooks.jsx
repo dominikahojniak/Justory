@@ -2,7 +2,11 @@ import React from 'react';
 import './BookInfoRatedBooks.css';
 import {Link} from 'react-router-dom';
 import Rating from '@mui/material/Rating';
+import Button from '@mui/material/Button';
+import DeleteIcon from '@mui/icons-material/Delete';
 import axios from '../../../axiosConfig.js';
+
+
 
 const BookInfoToRead = ({id, title, authors = [], imageSrc, rating, onRatingRemoved}) => {
 
@@ -38,9 +42,13 @@ const BookInfoToRead = ({id, title, authors = [], imageSrc, rating, onRatingRemo
                     readOnly
                 />
             </div>
-            <button onClick={handleRemoveRating} className="remove-rating-button">
-                Remove Rating
-            </button>
+            <Button
+                variant="outlined"
+                startIcon={<DeleteIcon />}
+                onClick={handleRemoveRating}
+                className="remove-rating-button"
+            >
+            </Button>
         </div>
     );
 };

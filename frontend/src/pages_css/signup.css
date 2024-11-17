@@ -12,10 +12,10 @@
 }
 .signup-main{
     margin-top: 10vh;
-    min-height: 80vh;
+    min-height: 85vh;
 }
 body{
-    background-color: #0B0C0B;
+    background-color: #2B2D30;
     width:100vw;
     height: 100vh;
     display: flex;
@@ -42,13 +42,13 @@ body{
     display: none;
 }
 #signup-title{
-    color: #D2CBC1;
+    color: #efebe5;
     font-family:'Frank Ruhl Libre',serif;
     font-weight: 400;
     font-size:64px;
 }
 #email,#name,#phone, #password{
-    background-color:#D2CBC1;
+    background-color:#efebe5;
     opacity: 0.55;
     border: none;
     width: 24vw;
@@ -59,8 +59,13 @@ body{
     font-family:'Roboto', serif;
     font-size:24px;
 }
+.form-signup input:-webkit-autofill,
+.form-signup input:-webkit-autofill:focus {
+    box-shadow: 0 0 0px 1000px #efebe5 inset !important;
+    -webkit-text-fill-color: #0B0C0B !important;
+}
 #signup-button{
-    background-color: #4D5038;
+    background-color: #547838;
     color: #0A0805;
     font-family:'Frank Ruhl Libre',serif;
     border: none;
@@ -68,6 +73,7 @@ body{
     width: 24vw;
     height: 7vh;
     margin-top: 10vh;
+    border-radius: 0;
 }
 .goToSignup{
     display: flex;
@@ -75,7 +81,7 @@ body{
     gap: 0.5rem;
 }
 .donthaveanaccount{
-    color:#D2CBC1;
+    color:#efebe5;
     font-family:'Frank Ruhl Libre',serif;
     font-size:22px;
 }

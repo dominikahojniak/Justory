@@ -7,23 +7,23 @@
 }
 .main-addbook {
     margin-top: 10vh;
-    min-height: 80vh;
+    min-height: 85vh;
     flex-shrink: 0;
 }
 .add {
     font-family: 'Frank Ruhl Libre', serif;
-    color: #D2CBC1;
+    color: #efebe5;
     font-weight: 400;
     font-size: 40px;
     text-align: center;
-    box-shadow: 0 1px 1px #000000;
+    border-bottom: 1px solid #191b1c;
     width: calc(100vw - 30rem);
     margin-right: auto;
     margin-left: auto;
     margin-bottom: 1rem;
 }
 body {
-    background-color: #0B0C0B;
+    background-color: #2B2D30;
     width: 100vw;
     height: 100vh;
     display: flex;
@@ -39,7 +39,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    color:#588527;
+    color:#547838;
     text-decoration: none;
     font-family:'Frank Ruhl Libre',serif;
     font-size:22px;
@@ -57,7 +57,7 @@ body {
     z-index: 1;
 }
 #author,#title,#ISBN, #date,#language,#description, #publisher, #categories{
-    background-color:#D2CBC1;
+    background-color:#efebe5;
     opacity: 0.55;
     width: 24vw;
     height: 7vh;
@@ -68,7 +68,7 @@ body {
     font-size:24px;
 }
 .date-picker-container {
-    background-color: #D2CBC1;
+    background-color: #efebe5;
     opacity: 0.55;
     width: 24.3vw;
     height: 7vh;
@@ -80,7 +80,7 @@ body {
     padding: 0.5rem;
 }
 .custom-date-picker input {
-    background-color: #D2CBC1; /* Jasne tło */
+    background-color: #efebe5; /* Jasne tło */
     opacity: 0.55;
     width: 24vw;
     height: 7vh;
@@ -91,7 +91,7 @@ body {
     text-align: center;
 }
 #add-button{
-    background-color: #4D5038;
+    background-color: #547838;
     color: #0A0805;
     font-family:'Frank Ruhl Libre',serif;
     border: none;
@@ -105,7 +105,7 @@ body {
     border: 2px solid red;
 }
 .custom-date-picker {
-    background-color:#D2CBC1;
+    background-color:#efebe5;
     opacity: 0.55;
     width: 24vw;
 }

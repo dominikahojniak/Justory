@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Searching.css';
 import axios from '../../../axiosConfig.js';
-import GreenSearch from '../../img/green-search.svg';
+import GreenSearch from '../../img/searchIconInSearching.svg';
 const Searching = ({ onSearchResults }) => {
     const [searchQuery, setSearchQuery] = useState('');
     const [searchResults, setSearchResults] = useState([]);

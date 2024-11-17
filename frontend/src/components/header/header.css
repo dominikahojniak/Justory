@@ -7,7 +7,7 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    background-color: #0B0C0B;
+    background-color: #2B2D30;
     box-shadow: 0 1px 1px #000000;
     z-index: 999;
 }
@@ -40,25 +40,37 @@
 
 .header-nav a {
     text-decoration: none;
-    color: #D2CBC1;
+    color: #efebe5;
     font-family: 'Frank Ruhl Libre', serif;
-    font-size:20px;
+    font-size:22px;
     font-weight: 400;
+    display: flex;
+    align-items: center;
+}
+
+.header-nav a:hover {
+    color: #b8b6b2;
 }
 
 .header-nav li a.active {
-    color: #6F7D09;
+    color: #547838;
     font-weight: 600;
 }
 
-.header-nav ul li:nth-child(6) {
+.header-nav ul li:nth-child(7) {
     margin-right: 2%;
 }
 .header-nav ul li:not(:first-child) img {
-    display: none;
+margin-right: 10px;
+}
+.loginsignup {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1vh;
 }
 #signup-link {
-    background-color: #4D5038;
+    background-color: #547838;
     color: #0A0805;
     margin-right: 2vh;
     padding: 2vh 1vh;
