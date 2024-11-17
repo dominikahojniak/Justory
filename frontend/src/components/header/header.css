@@ -57,7 +57,7 @@
     font-weight: 600;
 }
 
-.header-nav ul li:nth-child(7) {
+.header-nav ul li:last-child {
     margin-right: 2%;
 }
 .header-nav ul li:not(:first-child) img {
