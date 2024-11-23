@@ -22,10 +22,13 @@ export default function InputFileUpload({ onChange, error }) {
             variant="contained"
             tabIndex={-1}
             startIcon={<CloudUploadIcon />}
-            sx={{ bgcolor: error ? "#ff0000" : "#588527" }}
+            sx={{ bgcolor: error ? "#ff0000" : "#547838" ,
+                width: "24.5vw" ,
+                borderRadius: "0px",
+                height: "7vh",}}
             error={error}
         >
-            Upload file
+            Dodaj zdjęcie
             <VisuallyHiddenInput type="file" onChange={onChange}/>
         </Button>
     );

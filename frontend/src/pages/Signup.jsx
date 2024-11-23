@@ -20,11 +20,11 @@ const SignUp = () => {
     const handleRegister = async (event) => {
         event.preventDefault();
         if (!email || !name || !phone || !password) {
-            alert('Please fill in all fields.');
+            alert('Wypełnij wszystkie pola.');
             return;
         }
         if (Object.values(errors).some(error => error)) {
-            alert('Please fix validation errors.');
+            alert('Popraw błędy walidacji.');
             return;
         }
         try {
@@ -38,7 +38,7 @@ const SignUp = () => {
             navigate('/');
         } catch (error) {
             console.error('Registration failed:', error.response.data);
-            alert('Registration failed');
+            alert('Rejestracja nieudana');
         }
     };
     const validatePhone = (value) => {
@@ -61,17 +61,17 @@ const SignUp = () => {
                 <div className="signup">
                     <form className="form-signup" onSubmit={handleRegister} >
                         <div className="form-login">
-                            <p id="changeToLogin"><a href="login">Login</a></p>
+                            <p id="changeToLogin"><a href="login">Zaloguj się</a></p>
                         </div>
-                        <h1 id="signup-title">Sign Up</h1>
+                        <h1 id="signup-title">Zarejestruj się</h1>
                         <div className="logoPhoto">
                             <img src={maleMobileLogo} alt="logo"/>
                         </div>
-                        <input name="name" type="text" placeholder="name" id="name" value={name} onChange={e => setName(e.target.value)}/>
-                        <input name="email" type="text" placeholder="email" id="email" value={email} onChange={e => setEmail(e.target.value)}/>
-                        <input name="phone" type="text" placeholder="phone" id="phone" value={phone} onChange={handlePhoneChange} className={errors.phone ? 'error' : ''}/>
-                        <input name="password" type="password" placeholder="password" id="password" value={password} onChange={e => setPassword(e.target.value)}/>
-                        <button type="submit" id="signup-button"> SIGN UP</button>
+                        <input name="name" type="text" placeholder="Nazwa użytkownika" id="name" value={name} onChange={e => setName(e.target.value)}/>
+                        <input name="email" type="text" placeholder="Adres e-mail" id="email" value={email} onChange={e => setEmail(e.target.value)}/>
+                        <input name="phone" type="text" placeholder="Numer telefonu" id="phone" value={phone} onChange={handlePhoneChange} className={errors.phone ? 'error' : ''}/>
+                        <input name="password" type="password" placeholder="Hasło" id="password" value={password} onChange={e => setPassword(e.target.value)}/>
+                        <button type="submit" id="signup-button"> ZAREJESTRUJ SIĘ</button>
                     </form>
                 </div>
             </main>

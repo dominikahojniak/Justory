@@ -25,7 +25,7 @@ const Premieres = () => {
             <Header activePage="premieres" />
             <main className='main-premieres'>
                 <div className="premieres">
-                    Premieres
+                    Premiery Miesiąca
                 </div>
                 <div className="news-premieres">
                     {books.map((book, index) => (

@@ -29,6 +29,7 @@ public class Books {
     )
     private Set<Authors> authors;
     private String language;
+    @Column(length = 3000)
     private String description;
     private String ISBN;
     private LocalDate date;

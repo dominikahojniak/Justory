@@ -9,10 +9,10 @@ const Footer = ({ showProfileAndHello , username}) => {
     return (
         <footer className={`footer-id ${showProfileAndHello ? 'home-footer-visible' : 'no'}`}>
             <ul className="footer-list">
-                <li><a href="/help" className={location.pathname === '/help' ? 'active' : ''}>Help</a></li>
-                <li><a href="/aboutus" className={location.pathname === '/aboutus' ? 'active' : ''}>About Us</a></li>
-                <li><a href="/contact" className={location.pathname === '/contact' ? 'active' : ''}>Contact</a></li>
-                {showProfileAndHello && <li>Hello {username}</li>}
+                <li><a href="/help" className={location.pathname === '/help' ? 'active' : ''}>Pomoc</a></li>
+                <li><a href="/aboutus" className={location.pathname === '/aboutus' ? 'active' : ''}>O nas</a></li>
+                <li><a href="/contact" className={location.pathname === '/contact' ? 'active' : ''}>Kontakt</a></li>
+                {showProfileAndHello && <li>Witaj {username}</li>}
             </ul>
             <div className="media-footer">
                 <a href="https://www.linkedin.com/notifications/?filter=all" target="_blank"><img src={linkedin} alt="linkedin" /></a>

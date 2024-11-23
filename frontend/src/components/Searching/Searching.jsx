@@ -21,7 +21,7 @@ const Searching = ({ onSearchResults }) => {
             <form className="form-searching" onSubmit={handleSearch}>
                 <input
                     type="text"
-                    placeholder="Search for title or author..."
+                    placeholder="Szukaj po tytule lub autorze..."
                     id="searching"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}

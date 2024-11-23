@@ -63,11 +63,12 @@ const Home = () => {
             <Header activePage="home" />
             <main>
                 <div className="description">
-                    <h3>Discover the stories you've been searching for<br />and the places to find them. </h3>
-                    <p>Join justStory, your key to book premieres, and unlock the door to a world of<br />reading possibilities. </p>
+                    <h3>Odkryj historie, których szukasz,<br/>i miejsca, w których możesz je znaleźć.</h3>
+                    <p>Dołącz do justStory, klucza do premier książkowych, i otwórz drzwi<br/>do świata czytelniczych
+                        możliwości.</p>
                 </div>
                 <div className="catalog">
-                    Catalog
+                    Zobacz nasz katalog
                 </div>
                 <div className="news">
                     {books.map((book) => (
@@ -77,7 +78,7 @@ const Home = () => {
                 {isLoggedIn && (
                     <>
                         <div className="catalog">
-                            Recommendations
+                            Te tytuły mogą Cię zainteresować
                         </div>
                         {recommendedBooks.length > 0 ? (
                             <div className="news">
@@ -86,7 +87,7 @@ const Home = () => {
                                 ))}
                             </div>
                         ) : (
-                            <p className="no-recommendations">You currently have no recommendations. Please rate some books or add books to your To Read list.</p>
+                            <p className="no-recommendations">Aktualnie nie masz rekomendacji. Oceń kilka książek lub dodaj książki do swojej listy "Do przeczytania".</p>
                         )}
                     </>
                 )}

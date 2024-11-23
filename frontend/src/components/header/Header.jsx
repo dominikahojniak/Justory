@@ -64,22 +64,22 @@ const Header = ({ activePage }) => {
                         <img src={malelogo} alt="logo"/>
                     </div>
                 </li>
-                <li><Link to="/home" className={activePage === 'home' ? 'active' : ''}><img src={homeImage} alt="Home"/>Home</Link></li>
-                <li><Link to="/premieres" className={activePage === 'premieres' ? 'active' : ''}><img src={premieresImage} alt="Premieres"/>Premieres</Link></li>
-                <li><Link to="/toRead" className={activePage === 'toRead' ? 'active' : ''}><img src={ToReadImage} alt="To Read"/>To Read</Link></li>
-                <li><Link to="/search" className={activePage === 'search' ? 'active' : ''}><img src={searchImage} alt="Search"/>Search</Link></li>
+                <li><Link to="/home" className={activePage === 'home' ? 'active' : ''}><img src={homeImage} alt="Home"/>Strona Główna</Link></li>
+                <li><Link to="/premieres" className={activePage === 'premieres' ? 'active' : ''}><img src={premieresImage} alt="Premieres"/>Premiery</Link></li>
+                <li><Link to="/toRead" className={activePage === 'toRead' ? 'active' : ''}><img src={ToReadImage} alt="To Read"/>Do przeczytania</Link></li>
+                <li><Link to="/search" className={activePage === 'search' ? 'active' : ''}><img src={searchImage} alt="Search"/>Wyszukaj</Link></li>
                 {isLoggedIn && (
                     <>
                         {isAdmin && (
-                            <li><Link to="/addBook" className={activePage === 'addbook' ? 'active' : ''}><img src={AddBookImage} alt="Add Book"/>Add Book</Link></li>
+                            <li><Link to="/addBook" className={activePage === 'addbook' ? 'active' : ''}><img src={AddBookImage} alt="Add Book"/>Dodaj</Link></li>
                         )}
-                        <li><Link to="/profile" className={activePage === 'profile' ? 'active' : ''}><img src={ProfileImage} alt="Profile"/>Profile</Link></li>
+                        <li><Link to="/profile" className={activePage === 'profile' ? 'active' : ''}><img src={ProfileImage} alt="Profile"/>Profil</Link></li>
                     </>
                 )}
                 {!isLoggedIn && (
                     <div className="loginsignup">
-                        <Link to="/login">Log In</Link>
-                        <Link to="/signup" id="signup-link">Sign Up</Link>
+                        <Link to="/login">Logowanie</Link>
+                        <Link to="/signup" id="signup-link">Rejestracja</Link>
                     </div>
                 )}
             </ul>

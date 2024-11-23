@@ -35,7 +35,7 @@ const BookInfoToRead = ({id, title, authors = [], imageSrc, removeBook, rating, 
             </Link>
             <div className="news-description-toread">
                 <h3>{title}</h3>
-                <p>by {authors && authors.map(author => (
+                <p> {authors && authors.map(author => (
                     <span key={author.id}>{author.firstName} {author.lastName}</span>
                 )).reduce((prev, curr) => [prev, ', ', curr])}</p>
             </div>

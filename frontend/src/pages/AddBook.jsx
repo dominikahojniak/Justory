@@ -54,11 +54,11 @@ const AddBook = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (errors.ISBN || errors.file || errors.title || errors.author || errors.language || errors.description) {
-            alert('Please fix validation errors.');
+            alert('Proszę poprawić błędy walidacji.');
             return;
         }
         if (!title || !author || !ISBN || !date || !language || !description || !file) {
-            alert('Please fill in all fields.');
+            alert('Proszę wypełnić wszystkie pola.');
             return;
         }
 
@@ -113,9 +113,10 @@ const AddBook = () => {
             });
 
             console.log('Book added successfully:', response.data);
-            alert('Book added successfully');
+            alert('Książka została pomyślnie dodana!');
         } catch (error) {
             console.error('Error adding book:', error);
+            alert('Błąd podczas dodawania książki!')
         }
     };
 
@@ -124,27 +125,27 @@ const AddBook = () => {
             <Header activePage="addbook" />
             <main className='main-addbook'>
                 <div className="add">
-                    Add Book
+                    Dodaj Książkę
                 </div>
                 <div className="addbook">
                     <form className="form-addbook" onSubmit={handleSubmit}>
-                        <input name="title" type="text" placeholder="title" id="title" value={title} onChange={(e) => setTitle(e.target.value)} />
-                        <input name="author" type="text" placeholder="author (comma-separated)" id="author" value={author} onChange={(e) => setAuthor(e.target.value)} />
+                        <input name="title" type="text" placeholder="Tytuł" id="title" value={title} onChange={(e) => setTitle(e.target.value)} />
+                        <input name="author" type="text" placeholder="Autor (oddziel przecinkiem)" id="author" value={author} onChange={(e) => setAuthor(e.target.value)} />
                         <input name="ISBN" type="text" placeholder="ISBN" id="ISBN" value={ISBN} onChange={(e) => setISBN(e.target.value)} />
-                        <input name="categories" type="text" placeholder="categories (comma-separated)" id="categories" value={categories} onChange={(e) => setCategories(e.target.value)} />
-                        <input name="publisher" type="text" placeholder="publisher" id="publisher" value={publisher} onChange={(e) => setPublisher(e.target.value)} />
+                        <input name="categories" type="text" placeholder="Kategoria (oddziel przecinkiem)" id="categories" value={categories} onChange={(e) => setCategories(e.target.value)} />
+                        <input name="publisher" type="text" placeholder="Wydawnictwo" id="publisher" value={publisher} onChange={(e) => setPublisher(e.target.value)} />
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                             <div className="date-picker-container">
                                 <DatePicker
-                                    label="Select date"
+                                    label="Wybierz datę"
                                     value={date}
                                     onChange={(newValue) => setDate(newValue)}
                                     renderInput={(params) => <input {...params} />}
                                 />
                             </div>
                         </LocalizationProvider>
-                        <input name="language" type="text" placeholder="language" id="language" value={language} onChange={(e) => setLanguage(e.target.value)} />
-                        <input name="description" type="text" placeholder="description" id="description" value={description} onChange={(e) => setDescription(e.target.value)} />
+                        <input name="language" type="text" placeholder="Język" id="language" value={language} onChange={(e) => setLanguage(e.target.value)} />
+                        <input name="description" type="text" placeholder="Opis" id="description" value={description} onChange={(e) => setDescription(e.target.value)} />
                         <InputFileUpload onChange={(e) => setFile(e.target.files[0])} />
                         <AccessTypeComponent
                             platforms={platforms}
@@ -153,7 +154,7 @@ const AddBook = () => {
                             availability={availability}
                             setAvailability={setAvailability}
                         />
-                        <button type="submit" id="add-button">ADD BOOK</button>
+                        <button type="submit" id="add-button">DODAJ KSIĄŻKĘ</button>
                     </form>
                 </div>
             </main>

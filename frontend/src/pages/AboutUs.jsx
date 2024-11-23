@@ -7,14 +7,16 @@ const AboutUs = () => {
         <div className="aboutus-container">
             <Header activePage="aboutus" />
             <main className="aboutus-content">
-                <p>Welcome to juStory!</p>
+                <p>Witamy w juStory!</p>
 
-                <p>We are here to make it easier for you to access valuable information about the literary
-                    worlds.<br/><br/> In one place you will find where to buy books, in what form and the latest
-                    premieres.<br/> You don't have to look everywhere anymore - we are your destination where literature
-                    enthusiasts meet, share their discoveries and get inspiration for new adventures with books.</p>
+                <p>Jesteśmy tutaj, aby ułatwić Ci dostęp do wartościowych informacji o literackich światach.<br/><br/>
+                    W jednym miejscu znajdziesz informacje o tym, gdzie kupić książki, w jakiej formie oraz o
+                    najnowszych premierach.<br/>
+                    Nie musisz już szukać wszędzie - jesteśmy miejscem, gdzie miłośnicy literatury spotykają się, dzielą
+                    swoimi odkryciami
+                    i czerpią inspirację do nowych przygód z książkami.</p>
 
-                <p>We transform reading into a fascinating journey!</p>
+                <p>Przekształcamy czytanie w fascynującą podróż!</p>
             </main>
             <Footer showProfileAndHello={false}/>
         </div>

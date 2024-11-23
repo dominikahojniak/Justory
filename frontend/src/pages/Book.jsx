@@ -11,6 +11,8 @@ import axios from '../../axiosConfig.js';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
+import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
@@ -123,9 +125,9 @@ const Book = () => {
             setAddError("");
         } catch (error) {
             if (error.response && error.response.status === 409) {
-                setAddError("Book is already in the to-read list.");
+                setAddError("Książka już znajduje się na liście do przeczytania.");
             } else {
-                setAddError("Error adding book to read list.");
+                setAddError("Błąd podczas dodawania książki do listy.");
             }
             console.error('Error adding book to read list:', error);
         }
@@ -145,7 +147,7 @@ const Book = () => {
                     Authorization: `Bearer ${localStorage.getItem('token')}`
                 }
             });
-            setAddResponseDeleted("Deleted permanently from app");
+            setAddResponseDeleted("Usunięto na stałe z aplikacji");
         } catch (error) {
             console.error('Error deleting book:', error);
         }
@@ -167,11 +169,17 @@ const Book = () => {
                     <form className="form-book">
                         {isLoggedIn && (
                             <>
-                                {!isAdded && <button id="addToRead-button" onClick={handleAddToReadList}>+ To Read</button>}
-                                {isAdded && <div className="good-result">Book added to read list!</div>}
+                                {!isAdded && (
+                                    <button id="addToRead-button" onClick={handleAddToReadList}>
+                                        <BookmarkAddIcon/>
+                                    </button>
+                                )}
+                                {isAdded && <div className="good-result">Książka dodana do listy do przeczytania!</div>}
                                 {addError && <div className="bad-result">{addError}</div>}
                                 {isAdmin && (
-                                    <button id="delete-button" onClick={handleDeleteBook}>Delete Book</button>
+                                    <button id="delete-button" onClick={handleDeleteBook}>
+                                        <DeleteForeverIcon/>
+                                    </button>
 
                                 )}
                                 {addResponseDeleted && <div className="bad-result">{addResponseDeleted}</div>}
@@ -182,14 +190,14 @@ const Book = () => {
                 <div className="right">
                     <div className="news-description-book">
                         <h3>{book.title}</h3>
-                        <p>by {book.authors && book.authors.map(author => (
+                        <p>autorzy: {book.authors && book.authors.map(author => (
                             <span key={author.id}>{author.firstName} {author.lastName}</span>
                         )).reduce((prev, curr) => [prev, ', ', curr])} </p>
-                        <p>date: {new Date(book.date).toLocaleDateString()}</p>
+                        <p>data premiery: {new Date(book.date).toLocaleDateString()}</p>
                         <p>ISBN: {book.isbn}</p>
-                        <p>language: {book.language}</p>
-                        <p>publisher: {book.publisher && book.publisher.name}</p>
-                        <p>categories: {book.categories && book.categories.map(category => (
+                        <p>język: {book.language}</p>
+                        <p>wydawnictwo: {book.publisher && book.publisher.name}</p>
+                        <p>kategorie: {book.categories && book.categories.map(category => (
                             <span key={category.id}>{category.name}</span>
                         )).reduce((prev, curr) => [prev, ', ', curr])}</p>
                     </div>
@@ -197,12 +205,12 @@ const Book = () => {
                     <div className="subscription">
                         <div className="news-title-container-book">
                         <div className="news-title-book">
-                                <h3>Subscription</h3>
+                                <h3>Subscrybuj</h3>
                             </div>
                         </div>
                         <div className="items">
                             {book.availabilities && book.availabilities
-                                .filter(item => item.accessTypeName === "subscription")
+                                .filter(item => item.accessTypeName === "subscrypcja")
                                 .map(item => (
                                     <PlatformItem
                                         key={item.platformName + item.formatName}
@@ -219,12 +227,12 @@ const Book = () => {
                     <div className="buy">
                         <div className="news-title-container-book">
                             <div className="news-title-book">
-                                <h3>Buy</h3>
+                                <h3>Kup</h3>
                             </div>
                         </div>
                         <div className="items">
                             {book.availabilities && book.availabilities
-                                .filter(item => item.accessTypeName === "purchase")
+                                .filter(item => item.accessTypeName === "kupno")
                                 .map(item => (
                                     <PlatformItem
                                         key={item.platformName + item.formatName}

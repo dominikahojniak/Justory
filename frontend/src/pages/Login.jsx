@@ -24,7 +24,7 @@ const Login = () => {
             navigate('/home');
         } catch (error) {
             console.error('Login failed:', error.response.data);
-            alert('Login failed');
+            alert('Logowanie nieudane');
         }
     };
     return (
@@ -33,19 +33,19 @@ const Login = () => {
             <main className='login-main'>
                 <div className="login">
                     <form className="form" onSubmit={handleLogin}>
-                        <h1 id="login-title">Log In</h1>
+                        <h1 id="login-title">Zaloguj się</h1>
                         <div className="logoPhoto">
                             <img src={maleMobileLogo} alt="logo" />
                         </div>
-                        <input name="email" type="text" placeholder="email" id="email"  value={email}  onChange={e => setEmail(e.target.value)}/>
-                        <input name="password" type="password" placeholder="password" id="password"  value={password} onChange={e => setPassword(e.target.value)}/>
-                        <button type="submit" id="login-button"> LOG IN </button>
+                        <input name="email" type="text" placeholder="Adres e-mail" id="email"  value={email}  onChange={e => setEmail(e.target.value)}/>
+                        <input name="password" type="password" placeholder="Hasło" id="password"  value={password} onChange={e => setPassword(e.target.value)}/>
+                        <button type="submit" id="login-button"> ZALOGUJ SIĘ </button>
                         <div id='goToSignup' className='goToSignup'>
                             <div id='donthaveanaccount' className='donthaveanaccount'>
-                                Don't have an account?
+                                Nie posiadasz konta?
                             </div>
                             <a href="signup" className='signup'>
-                                Sign Up
+                                Zarejestruj się
                             </a>
                         </div>
                     </form>

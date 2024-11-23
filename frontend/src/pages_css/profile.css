@@ -74,12 +74,12 @@ body {
     padding: 5px;
 }
 
-.logout-profile , .rated-books-button{
+.logout-profile {
     background-color: #547838;
     color: #0A0805;
-    width: 24vw;
-    height: 7vh;
-    font-size: 30px;
+    width: 12vw;
+    height: 6vh;
+    font-size: 20px;
     font-family: 'Frank Ruhl Libre', serif;
     font-weight: 400;
     margin-top: 10px;
@@ -89,12 +89,29 @@ body {
     border-radius: 0;
 }
 .rated-books-button:hover{
-    background-color: #74a34f;
+    color: #74a34f;
 }
 .logout-profile:hover{
     background-color: #bc2121;
 }
-
+.rated-books-button{
+    background-color: #2B2D30;
+    color: #efebe5;
+    width: 15vw;
+    height: 8vh;
+    font-size: 20px;
+    font-family: 'Frank Ruhl Libre', serif;
+    font-weight: 400;
+    margin-top: 10px;
+    padding: 5px;
+    text-decoration: none;
+    border: none;
+    border-radius: 0;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 5px;
+}
 /* stopka */
 
 @media (max-width: 900px) {

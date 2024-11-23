@@ -80,7 +80,7 @@ body {
     padding: 0.5rem;
 }
 .custom-date-picker input {
-    background-color: #efebe5; /* Jasne tło */
+    background-color: #efebe5;
     opacity: 0.55;
     width: 24vw;
     height: 7vh;

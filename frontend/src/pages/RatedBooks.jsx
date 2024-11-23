@@ -32,7 +32,7 @@ function RatedBooks() {
         <div className='toread-container'>
             <Header activePage="ratedBooks"/>
             <main className='main-toread'>
-                <div className="toRead">Rated Books</div>
+                <div className="toRead">Ocenione Książki</div>
                 <div className="news-toread">
                     {ratedBooks.map((ratedBook) => (
                         <BookInfoRatedBooks

@@ -7,12 +7,12 @@ const Help = () => {
         <div className="help-container">
             <Header activePage="help" />
             <main className="help-content">
-                <p>Customer Service Contact:</p>
-                <p>help@gmail.com</p>
-                <p>Reporting Problems:</p>
-                <p>problems@gmail.com</p>
+                <p>Kontakt z Obsługą Klienta:</p>
+                <p>pomoc@gmail.com</p>
+                <p>Zgłaszanie problemów:</p>
+                <p>problemy@gmail.com</p>
             </main>
-            <Footer showProfileAndHello={false} />
+            <Footer showProfileAndHello={false}/>
         </div>
     );
 }

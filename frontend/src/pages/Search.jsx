@@ -26,11 +26,11 @@ const Search = () => {
     <div className="search-container">
        <Header activePage="search" />
         <main className='main-search'>
-            <div className="search">Search</div>
+            <div className="search">Wyszukaj</div>
             <Searching onSearchResults={handleSearchResults}/>
             {searchResults.length === 0 && (
                 <div className="categories-list">
-                    <h3>Browse by Category</h3>
+                    <h3>Wyszukaj po Kategorii </h3>
                     <div className="all-categories">
                         {categories.map(category => (
                             <Link to={`/category/${category.name}`} key={category.name} className="category-item">

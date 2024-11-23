@@ -5,6 +5,7 @@ import Footer from '../components/Footer/Footer.jsx';
 //import profileImage from './img/duzeprofil.svg';
 import axios from '../../axiosConfig.js';
 import { useNavigate } from 'react-router-dom';
+import StarsIcon from '@mui/icons-material/Stars';
 const Profile = () => {
     const [userProfile, setUserProfile] = useState(null);
     const navigate = useNavigate();
@@ -37,7 +38,7 @@ const Profile = () => {
             <Header activePage="profile" />
             <main className='main-profile'>
                 <div className="profile">
-                    Profile
+                    Profil
                 </div>
                 {userProfile && (
                     <div className="news-profile">
@@ -45,9 +46,10 @@ const Profile = () => {
                         <div className="email-profile">{userProfile.email}</div>
                         <div className="email-profile">{userProfile.phone}</div>
                         <button onClick={handleSeeRatedBooks} className="rated-books-button">
-                            See Rated Books
+                            <StarsIcon/>
+                            Ocenione książki
                         </button>
-                        <button onClick={handleLogout} className="logout-profile">Log out</button>
+                        <button onClick={handleLogout} className="logout-profile">Wyloguj się</button>
                     </div>
                 )}
             </main>

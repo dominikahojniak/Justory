@@ -7,10 +7,10 @@ const Contact = () => {
         <div className="contact-container">
             <Header activePage="contact" />
             <main className="contact-content">
-                <p>If you have any questions, you can always contact us on this email:</p>
-                <p>juStory@gmail.com</p>
-                <p>Hotline +48 22 322 65 44</p>
-                <p>Open on weekdays from 10:00 to 16:00.</p>
+                <p>Jeśli masz jakiekolwiek pytania, możesz się z nami skontaktować pod tym adresem e-mail:</p>
+                <p>dominikahojniak@gmail.com</p>
+                <p>Infolinia +48 692 774 166</p>
+                <p>Otwarte w dni robocze od 10:00 do 16:00.</p>
             </main>
             <Footer showProfileAndHello={false} />
         </div>

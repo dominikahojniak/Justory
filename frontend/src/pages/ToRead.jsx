@@ -52,7 +52,7 @@ function ToRead() {
     <div className='toread-container'>
     <Header activePage="toRead" />
         <main className='main-toread'>
-            <div className="toRead">ToRead</div>
+            <div className="toRead">Do Przeczytania</div>
             <div className="news-toread">
                 {toReadBooks.map((book) => {
                     const ratingObj = userRatings.find(rating => rating.book.id === book.id);
