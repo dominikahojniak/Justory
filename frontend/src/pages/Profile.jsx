@@ -12,23 +12,26 @@ const Profile = () => {
     useEffect(() => {
         const fetchUserProfile = async () => {
             try {
-                const response = await axios.get('/api/users/profile', {
-                    headers: {
-                        Authorization: `Bearer ${localStorage.getItem('token')}`
-                    }
-                });
+                const response = await axios.get('/api/users/profile');
                 const { email, name, userFeaturesID } = response.data;
                 setUserProfile({ email, name, phone: userFeaturesID.phone });
             } catch (error) {
                 console.error('Error fetching user profile:', error);
+                if (error.response && error.response.status === 401) {
+                    navigate('/login');
+                }
             }
         };
 
         fetchUserProfile();
-    }, []);
-    const handleLogout = () => {
-        localStorage.removeItem('token');
-        navigate('/login');
+    }, [navigate]);
+    const handleLogout = async () => {
+        try {
+            await axios.post('/api/auth/logout');
+            navigate('/login');
+        } catch (error) {
+            console.error('Error during logout:', error);
+        }
     };
     const handleSeeRatedBooks = () => {
         navigate('/ratedBooks');

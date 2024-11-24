@@ -14,11 +14,7 @@ function ToRead() {
 
     const fetchToReadBooks = async () => {
         try {
-            const response = await axios.get('/api/toread/all', {
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem('token')}`
-                }
-            });
+            const response = await axios.get('/api/toread/all');
             setToReadBooks(response.data);
         } catch (error) {
             console.error('Error fetching ToRead books:', error);
@@ -26,11 +22,7 @@ function ToRead() {
     };
     const fetchUserRatings = async () => {
         try {
-            const response = await axios.get('/api/book-rating/user-ratings', {
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem('token')}`
-                }
-            });
+            const response = await axios.get('/api/book-rating/user-ratings');
             setUserRatings(response.data);
         } catch (error) {
             console.error('Error fetching user ratings:', error);
@@ -38,11 +30,7 @@ function ToRead() {
     };
     const removeBook = async (bookId) => {
         try {
-            await axios.delete(`/api/toread/removebook/${bookId}`, {
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem('token')}`
-                }
-            });
+            await axios.delete(`/api/toread/removebook/${bookId}`);
             setToReadBooks(toReadBooks.filter(book => book.id !== bookId));
         } catch (error) {
             console.error('Error removing book from ToRead list:', error);

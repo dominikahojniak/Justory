@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import '../pages_css/book.css';
 import Footer from '../components/Footer/Footer.jsx';
 import Header from '../components/Header/Header.jsx';
@@ -34,15 +34,12 @@ const Book = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(null);
     const [isAdmin, setIsAdmin] = useState(false);
     const [addResponseDeleted, setAddResponseDeleted] = useState("");
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchUserData = async () => {
             try {
-                const response = await axios.get('/api/users/profile', {
-                    headers: {
-                        Authorization: `Bearer ${localStorage.getItem('token')}`
-                    }
-                });
+                const response = await axios.get('/api/users/profile');
                 setIsLoggedIn(true);
                 setIsAdmin(response.data.role === 'ADMIN');
             } catch (error) {
@@ -116,11 +113,7 @@ const Book = () => {
             return;
         }
         try {
-            await axios.post(`/api/toread/addbook/${book.id}`, {}, {
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem('token')}`
-                }
-            });
+            await axios.post(`/api/toread/addbook/${book.id}`);
             setIsAdded(true);
             setAddError("");
         } catch (error) {
@@ -142,12 +135,11 @@ const Book = () => {
             return;
         }
         try {
-            await axios.delete(`/api/books/delete/${book.id}`, {
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem('token')}`
-                }
-            });
+            await axios.delete(`/api/books/delete/${book.id}`);
             setAddResponseDeleted("Usunięto na stałe z aplikacji");
+            setTimeout(() => {
+                navigate('/');
+            }, 3000);
         } catch (error) {
             console.error('Error deleting book:', error);
         }

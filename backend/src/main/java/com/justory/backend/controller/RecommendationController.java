@@ -9,10 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -32,7 +29,7 @@ public class RecommendationController {
     }
 
     @GetMapping
-    public ResponseEntity<List<BooksDTO>> getRecommendations(@RequestHeader("Authorization") String authorizationHeader) {
+    public ResponseEntity<List<BooksDTO>> getRecommendations(@CookieValue("token") String authorizationHeader) {
         try {
             Integer userId = getUserIdFromAuthorizationHeader(authorizationHeader);
             List<BooksDTO> recommendations = recommendationService.getRecommendationsForUser(userId);
@@ -43,8 +40,7 @@ public class RecommendationController {
     }
 
     private Integer getUserIdFromAuthorizationHeader(String authorizationHeader) throws Exception {
-        String jwtToken = authorizationHeader.substring(7);
-        String userEmail = jwtService.extractEmail(jwtToken);
+        String userEmail = jwtService.extractEmail(authorizationHeader);
         UsersDTO user = userService.getUserByEmail(userEmail);
         if (user != null) {
             return user.getId();

@@ -27,7 +27,7 @@ public class UserToReadListController {
         this.userService = userService;
     }
     @GetMapping("/all")
-    public ResponseEntity<?> getUserToReadBooks(@RequestHeader("Authorization") String authorizationHeader) {
+    public ResponseEntity<?> getUserToReadBooks(@CookieValue("token") String authorizationHeader) {
         try {
             Integer userId = getUserIdFromAuthorizationHeader(authorizationHeader);
             List<BooksDTO> toReadBooks = userToReadListService.getUserToReadBooks(userId);
@@ -37,7 +37,7 @@ public class UserToReadListController {
         }
     }
     @PostMapping("/addbook/{bookId}")
-    public ResponseEntity<?> addBookToUserToReadList(@PathVariable("bookId") Integer bookId, @RequestHeader("Authorization") String authorizationHeader) {
+    public ResponseEntity<?> addBookToUserToReadList(@PathVariable("bookId") Integer bookId, @CookieValue("token") String authorizationHeader) {
         try {
             Integer userId = getUserIdFromAuthorizationHeader(authorizationHeader);
             userToReadListService.addBookToUserToReadList(userId, bookId);
@@ -50,7 +50,7 @@ public class UserToReadListController {
         }
     }
     @DeleteMapping("/removebook/{bookId}")
-    public ResponseEntity<?> deleteBookFromUserToReadList(@PathVariable("bookId") Integer bookId, @RequestHeader("Authorization") String authorizationHeader) {
+    public ResponseEntity<?> deleteBookFromUserToReadList(@PathVariable("bookId") Integer bookId, @CookieValue("token") String authorizationHeader) {
         try {
             Integer userId = getUserIdFromAuthorizationHeader(authorizationHeader);
             userToReadListService.removeBookFromUserToReadList(userId, bookId);
@@ -61,8 +61,7 @@ public class UserToReadListController {
         }
     }
     private Integer getUserIdFromAuthorizationHeader(String authorizationHeader) throws Exception {
-        String jwtToken = authorizationHeader.substring(7);
-        String userEmail = jwtService.extractEmail(jwtToken);
+        String userEmail = jwtService.extractEmail(authorizationHeader);
         UsersDTO user = userService.getUserByEmail(userEmail);
         if (user != null) {
             return user.getId();

@@ -99,16 +99,9 @@ const AddBook = () => {
 
             formData.append('bookDTO', JSON.stringify(bookDTO));
 
-
-            const token = localStorage.getItem('token');
-            if (!token) {
-                console.log('token:', token);
-                return;
-            }
             const response = await axios.post('/api/books/add', formData, {
                 headers: {
-                    'Content-Type': 'multipart/form-data',
-                    'Authorization': `Bearer ${token}`
+                    'Content-Type': 'multipart/form-data'
                 }
             });
 

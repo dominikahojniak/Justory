@@ -31,7 +31,7 @@ public class BookRatingController {
     public ResponseEntity<?> addRating(
             @PathVariable("bookId") Integer bookId,
             @RequestParam("rating") int rating,
-            @RequestHeader("Authorization") String authorizationHeader) {
+            @CookieValue("token") String authorizationHeader) {
         try {
             Integer userId = getUserIdFromAuthorizationHeader(authorizationHeader);
             bookRatingService.addRating(userId, bookId, rating);
@@ -42,7 +42,7 @@ public class BookRatingController {
     }
 
     @GetMapping("/user-ratings")
-    public ResponseEntity<?> getUserRatings(@RequestHeader("Authorization") String authorizationHeader) {
+    public ResponseEntity<?> getUserRatings(@CookieValue("token") String authorizationHeader) {
         try {
             Integer userId = getUserIdFromAuthorizationHeader(authorizationHeader);
             List<BookRatingDTO> userRatings = bookRatingService.getRatingsByUserId(userId);
@@ -55,7 +55,7 @@ public class BookRatingController {
     @DeleteMapping("removebook/{bookId}")
     public ResponseEntity<?> deleteRating(
             @PathVariable("bookId") Integer bookId,
-            @RequestHeader("Authorization") String authorizationHeader) {
+            @CookieValue("token") String authorizationHeader) {
         try {
             Integer userId = getUserIdFromAuthorizationHeader(authorizationHeader);
             bookRatingService.deleteRating(userId, bookId);
@@ -67,8 +67,7 @@ public class BookRatingController {
 
 
     private Integer getUserIdFromAuthorizationHeader(String authorizationHeader) throws Exception {
-        String jwtToken = authorizationHeader.substring(7);
-        String userEmail = jwtService.extractEmail(jwtToken);
+        String userEmail = jwtService.extractEmail(authorizationHeader);
         UsersDTO user = userService.getUserByEmail(userEmail);
         if (user != null) {
             return user.getId();

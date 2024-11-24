@@ -34,7 +34,6 @@ const SignUp = () => {
                 phone: phone,
                 password: password,
             });
-            localStorage.setItem('token', response.data.token);
             navigate('/');
         } catch (error) {
             console.error('Registration failed:', error.response.data);

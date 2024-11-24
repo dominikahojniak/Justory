@@ -13,11 +13,7 @@ function RatedBooks() {
 
     const fetchRatedBooks = async () => {
         try {
-            const response = await axios.get('/api/book-rating/user-ratings', {
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem('token')}`
-                }
-            });
+            const response = await axios.get('/api/book-rating/user-ratings');
             setRatedBooks(response.data);
         } catch (error) {
             console.error('Error fetching rated books:', error);

@@ -25,12 +25,7 @@ const App = () => {
     useEffect(() => {
         const fetchUserProfile = async () => {
             try {
-                const response = await axios.get('/api/users/profile', {
-                    headers: {
-                        Authorization: `Bearer ${localStorage.getItem('token')}`
-                    }
-                });
-                console.log(response.data.role);
+                const response = await axios.get('/api/users/profile');
                 setIsLoggedIn(true);
                 setUserRole(response.data.role);
             } catch (error) {

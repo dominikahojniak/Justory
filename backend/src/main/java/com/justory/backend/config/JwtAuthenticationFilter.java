@@ -16,9 +16,14 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.servlet.http.Cookie;
 
 import org.springframework.http.HttpHeaders;
 import java.io.IOException;
+import java.util.Arrays;
+
+import static java.util.Objects.isNull;
+
 @Component
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
@@ -41,12 +46,21 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         final String jwtToken;
         final String userEmail;
 
-        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+        Cookie[] cookies = request.getCookies();
+        if (isNull(cookies)) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+        jwtToken = Arrays.stream(cookies)
+                .filter(cookie -> cookie.getName().equals("token"))
+                .map(Cookie::getValue)
+                .findFirst()
+                .orElse(null);
+        if(jwtToken == null) {
             filterChain.doFilter(request, response);
             return;
         }
 
-        jwtToken = authHeader.substring(7);
         try {
             userEmail = jwtService.extractEmail(jwtToken);
 

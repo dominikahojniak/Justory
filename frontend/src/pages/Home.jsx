@@ -15,11 +15,7 @@ const Home = () => {
 
         const fetchUserData = async () => {
             try {
-                const response = await axios.get('/api/users/profile', {
-                    headers: {
-                        Authorization: `Bearer ${localStorage.getItem('token')}`
-                    }
-                });
+                const response = await axios.get('/api/users/profile');
                 setUsername(response.data.name);
                 setIsLoggedIn(true);
             } catch (error) {
@@ -42,11 +38,7 @@ const Home = () => {
 
         const fetchRecommendedBooks = async () => {
             try {
-                const response = await axios.get('/api/recommendations', {
-                    headers: {
-                        Authorization: `Bearer ${localStorage.getItem('token')}`
-                    }
-                });
+                const response = await axios.get('/api/recommendations');
                 setRecommendedBooks(response.data);
             } catch (error) {
                 console.error('Error fetching recommended books:', error);
