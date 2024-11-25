@@ -122,11 +122,16 @@ const AddBook = () => {
                 </div>
                 <div className="addbook">
                     <form className="form-addbook" onSubmit={handleSubmit}>
-                        <input name="title" type="text" placeholder="Tytuł" id="title" value={title} onChange={(e) => setTitle(e.target.value)} />
-                        <input name="author" type="text" placeholder="Autor (oddziel przecinkiem)" id="author" value={author} onChange={(e) => setAuthor(e.target.value)} />
-                        <input name="ISBN" type="text" placeholder="ISBN" id="ISBN" value={ISBN} onChange={(e) => setISBN(e.target.value)} />
-                        <input name="categories" type="text" placeholder="Kategoria (oddziel przecinkiem)" id="categories" value={categories} onChange={(e) => setCategories(e.target.value)} />
-                        <input name="publisher" type="text" placeholder="Wydawnictwo" id="publisher" value={publisher} onChange={(e) => setPublisher(e.target.value)} />
+                        <input name="title" type="text" placeholder="Tytuł" id="title" value={title}
+                               onChange={(e) => setTitle(e.target.value)}/>
+                        <input name="author" type="text" placeholder="Autor (oddziel przecinkiem)" id="author"
+                               value={author} onChange={(e) => setAuthor(e.target.value)}/>
+                        <input name="ISBN" type="text" placeholder="ISBN" id="ISBN" value={ISBN}
+                               onChange={(e) => setISBN(e.target.value)}/>
+                        <input name="categories" type="text" placeholder="Kategoria (oddziel przecinkiem)"
+                               id="categories" value={categories} onChange={(e) => setCategories(e.target.value)}/>
+                        <input name="publisher" type="text" placeholder="Wydawnictwo" id="publisher" value={publisher}
+                               onChange={(e) => setPublisher(e.target.value)}/>
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                             <div className="date-picker-container">
                                 <DatePicker
@@ -137,9 +142,12 @@ const AddBook = () => {
                                 />
                             </div>
                         </LocalizationProvider>
-                        <input name="language" type="text" placeholder="Język" id="language" value={language} onChange={(e) => setLanguage(e.target.value)} />
-                        <input name="description" type="text" placeholder="Opis" id="description" value={description} onChange={(e) => setDescription(e.target.value)} />
-                        <InputFileUpload onChange={(e) => setFile(e.target.files[0])} />
+                        <input name="language" type="text" placeholder="Język" id="language" value={language}
+                               onChange={(e) => setLanguage(e.target.value)}/>
+                        <input name="description" type="text" placeholder="Opis" id="description" value={description}
+                               onChange={(e) => setDescription(e.target.value)}/>
+                        <InputFileUpload onChange={(e) => setFile(e.target.files[0])}/>
+                        <h3>Dodaj dostępności</h3>
                         <AccessTypeComponent
                             platforms={platforms}
                             formats={formats}

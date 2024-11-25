@@ -1,0 +1,49 @@
+.editbook-container{
+    height: 100vh;
+    width: 100vw;
+    margin-top: 0;
+    overflow-y: auto;
+}
+
+.main-editbook {
+    margin-top: 10vh;
+    min-height: 85vh;
+    flex-shrink: 0;
+}
+body {
+    background-color: #2B2D30;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    margin: 0;
+    min-height: 100vh;
+    overflow-y: auto;
+}
+.form-editbook{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    overflow: auto;
+    height: auto;
+    position: relative;
+    z-index: 1;
+}
+
+#eauthor,#etitle,#eISBN, #edate,#elanguage,#edescription, #epublisher, #ecategories {
+    background-color:#efebe5;
+    opacity: 0.55;
+    width: 24vw;
+    height: 7vh;
+    color: #0A0805;
+    font-family:'Roboto', serif;
+    font-size:24px;
+}
+#etitle::placeholder, #eauthor::placeholder,#eISBN::placeholder , #edate::placeholder, #elanguage::placeholder, #edescription::placeholder, #epublisher::placeholder, #ecategories::placeholder {
+    color:#0A0805;
+    font-family:'Roboto', serif;
+    font-size:24px;
+}

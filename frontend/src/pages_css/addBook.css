@@ -61,6 +61,9 @@ body {
     opacity: 0.55;
     width: 24vw;
     height: 7vh;
+    color: #0A0805;
+    font-family:'Roboto', serif;
+    font-size:24px;
 }
 #title::placeholder, #author::placeholder,#ISBN::placeholder , #date::placeholder, #language::placeholder, #description::placeholder, #publisher::placeholder, #categories::placeholder {
     color:#0A0805;

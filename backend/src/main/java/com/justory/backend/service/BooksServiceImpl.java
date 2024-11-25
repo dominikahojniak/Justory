@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -170,5 +171,78 @@ public class BooksServiceImpl implements BooksService {
                 .orElseThrow(() -> new RuntimeException("Category not found"));
         List<Books> books = booksRepository.findByCategoriesContaining(category);
         return books.stream().map(booksMapper::toDTO).collect(Collectors.toList());
+    }
+
+    @Override
+    @Transactional
+    public BooksDTO updateBook(Integer bookId, BooksDTO bookDTO, MultipartFile file) {
+        Books book = booksRepository.findById(bookId)
+                .orElseThrow(() -> new RuntimeException("Book not found"));
+
+        book.setTitle(bookDTO.getTitle())
+                .setLanguage(bookDTO.getLanguage())
+                .setDescription(bookDTO.getDescription())
+                .setISBN(bookDTO.getISBN())
+                .setDate(bookDTO.getDate());
+
+        if (file != null && !file.isEmpty()) {
+            String filePath = fileStorageService.saveFile(file, bookDTO.getId());
+            book.setImg(filePath);
+        }
+
+        Set<Authors> authors = bookDTO.getAuthors().stream()
+                .map(authorDTO -> authorsRepository.findByFirstNameAndLastName(
+                                authorDTO.getFirstName(), authorDTO.getLastName())
+                        .orElseGet(() -> authorsRepository.save(
+                                new Authors().setFirstName(authorDTO.getFirstName())
+                                        .setLastName(authorDTO.getLastName()))))
+                .collect(Collectors.toSet());
+        book.setAuthors(authors);
+
+        Set<Categories> categories = bookDTO.getCategories().stream()
+                .map(categoryDTO -> categoriesRepository.findByName(categoryDTO.getName())
+                        .orElseGet(() -> categoriesRepository.save(new Categories().setName(categoryDTO.getName()))))
+                .collect(Collectors.toSet());
+        book.setCategories(categories);
+
+        Publishers publisher = publishersRepository.findByName(bookDTO.getPublisher().getName())
+                .orElseGet(() -> publishersRepository.save(new Publishers().setName(bookDTO.getPublisher().getName())));
+        book.setPublisher(publisher);
+
+        Set<BookAvailabilities> existingAvailabilities = book.getAvailabilities();
+        Set<BookAvailabilities> updatedAvailabilities = new HashSet<>();
+
+        for (BookAvailabilitiesDTO availabilityDTO : bookDTO.getAvailabilities()) {
+            Platforms platform = platformsRepository.findByName(availabilityDTO.getPlatformName())
+                    .orElseThrow(() -> new RuntimeException("Platform not found"));
+            Formats format = formatsRepository.findByName(availabilityDTO.getFormatName())
+                    .orElseThrow(() -> new RuntimeException("Format not found"));
+            AccessTypes accessType = accessTypesRepository.findByName(availabilityDTO.getAccessTypeName())
+                    .orElseThrow(() -> new RuntimeException("Access type not found"));
+
+            Optional<BookAvailabilities> existing = existingAvailabilities.stream()
+                    .filter(a -> a.getPlatform().equals(platform)
+                            && a.getFormat().equals(format)
+                            && a.getAccessType().equals(accessType))
+                    .findFirst();
+
+            if (existing.isPresent()) {
+                updatedAvailabilities.add(existing.get());
+            } else {
+                BookAvailabilities newAvailability = new BookAvailabilities()
+                        .setBook(book)
+                        .setPlatform(platform)
+                        .setFormat(format)
+                        .setAccessType(accessType);
+
+                updatedAvailabilities.add(newAvailability);
+            }
+        }
+
+        book.getAvailabilities().clear();
+        book.getAvailabilities().addAll(updatedAvailabilities);
+
+        Books updatedBook = booksRepository.save(book);
+        return booksMapper.toDTO(updatedBook);
     }
 }

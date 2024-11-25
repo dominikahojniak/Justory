@@ -52,6 +52,25 @@ public class BooksController {
         return booksService.addBookWithAvailabilities(bookDTO, file);
 
     }
+
+    @PutMapping(value = "/edit/{bookId}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public BooksDTO updateBook(
+            @PathVariable Integer bookId,
+            @RequestPart(value = "file", required = false) MultipartFile file,
+            @RequestPart("bookDTO") String bookDTOJson) {
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
+        BooksDTO bookDTO;
+        try {
+            bookDTO = objectMapper.readValue(bookDTOJson, BooksDTO.class);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException("Error parsing JSON", e);
+        }
+
+        return booksService.updateBook(bookId, bookDTO, file);
+    }
+
     @DeleteMapping("/delete/{bookId}")
     public ResponseEntity<?> deleteBook(@PathVariable Integer bookId) {
         try {

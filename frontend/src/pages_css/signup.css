@@ -53,6 +53,9 @@ body{
     border: none;
     width: 24vw;
     height: 7vh;
+    color: #0A0805;
+    font-family:'Roboto', serif;
+    font-size:24px;
 }
 #name::placeholder, #email::placeholder,#phone::placeholder , #password::placeholder {
     color:#0A0805;

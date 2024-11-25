@@ -38,13 +38,16 @@ public class BookAvailabilities {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof BookAvailabilities)) return false;
         BookAvailabilities that = (BookAvailabilities) o;
-        return Objects.equals(id, that.id);
+        return Objects.equals(book.getId(), that.book.getId()) &&
+                Objects.equals(platform.getId(), that.platform.getId()) &&
+                Objects.equals(format.getId(), that.format.getId()) &&
+                Objects.equals(accessType.getId(), that.accessType.getId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(book.getId(), platform.getId(), format.getId(), accessType.getId());
     }
 }

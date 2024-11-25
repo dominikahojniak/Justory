@@ -13,6 +13,7 @@ import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import EditIcon from '@mui/icons-material/Edit';
 
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
@@ -161,26 +162,31 @@ const Book = () => {
                     <form className="form-book">
                         {isLoggedIn && (
                             <>
-                                {!isAdded && (
-                                    <button id="addToRead-button" onClick={handleAddToReadList}>
-                                        <BookmarkAddIcon/>
+                            {!isAdded && (
+                                <button id="addToRead-button" onClick={handleAddToReadList}>
+                                    <BookmarkAddIcon/>
+                                </button>
+                            )}
+                            {isAdded &&
+                                <div className="good-result">Książka dodana do listy do przeczytania!</div>}
+                            {addError && <div className="bad-result">{addError}</div>}
+                            {isAdmin && (
+                                <div className="admin-button">
+                                    <button id="edit-button" onClick={() => navigate(`/editbook/${book.title}`)}>
+                                        <EditIcon/>
                                     </button>
-                                )}
-                                {isAdded && <div className="good-result">Książka dodana do listy do przeczytania!</div>}
-                                {addError && <div className="bad-result">{addError}</div>}
-                                {isAdmin && (
                                     <button id="delete-button" onClick={handleDeleteBook}>
                                         <DeleteForeverIcon/>
                                     </button>
-
-                                )}
-                                {addResponseDeleted && <div className="bad-result">{addResponseDeleted}</div>}
-                            </>
+                                </div>
                         )}
-                    </form>
-                </div>
-                <div className="right">
-                    <div className="news-description-book">
+                        {addResponseDeleted && <div className="bad-result">{addResponseDeleted}</div>}
+                    </>
+                    )}
+                            </form>
+                            </div>
+                            <div className="right">
+                            <div className="news-description-book">
                         <h3>{book.title}</h3>
                         <p>autorzy: {book.authors && book.authors.map(author => (
                             <span key={author.id}>{author.firstName} {author.lastName}</span>

@@ -13,4 +13,6 @@ public interface BooksService {
     List<BooksDTO> searchBooks(String query);
     List<BooksDTO> findBooksByCategory(String categoryName);
     void deleteBookById(Integer bookId);
+    BooksDTO updateBook(Integer bookId, BooksDTO bookDTO, MultipartFile file);
+
 }

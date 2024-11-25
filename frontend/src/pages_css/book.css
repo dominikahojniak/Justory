@@ -112,6 +112,29 @@ body{
 #delete-button:hover{
     background-color: #ff0000;
 }
+#edit-button{
+    color: #0A0805;
+    background-color: #4682B4;
+    font-family:'Frank Ruhl Libre',serif;
+    border: none;
+    border-radius: 0px;
+    font-size:24px;
+    width: 3vw;
+    height: 7vh;
+    margin-top: 5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#edit-button:hover{
+    background-color: #53a3e6;
+}
+.admin-button{
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    gap: 2vw;
+}
 .main-book >.right{
     width: calc(7 * 100vw / 12);
     min-height: 70vh;

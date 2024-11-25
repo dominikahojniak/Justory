@@ -17,6 +17,7 @@ import CategoryBooks from './pages/CategoryBooks.jsx';
 import axios from '../axiosConfig.js';
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import RatedBooks from './pages/RatedBooks.jsx';
+import EditBook from './pages/EditBook.jsx';
 
 const App = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(null);
@@ -56,6 +57,14 @@ const App = () => {
                     element={
                         <ProtectedRoute isAllowed={isLoggedIn && userRole === 'ADMIN'}>
                             <AddBook/>
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path="/editbook/:title"
+                    element={
+                        <ProtectedRoute isAllowed={isLoggedIn && userRole === 'ADMIN'}>
+                            <EditBook />
                         </ProtectedRoute>
                     }
                 />
