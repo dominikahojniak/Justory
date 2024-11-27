@@ -13,13 +13,9 @@ const BookInfoToRead = ({id, title, authors = [], imageSrc, removeBook, rating, 
     };
     const handleRatingChange = async (event, newRating) => {
         try {
-            const token = localStorage.getItem('token');
-            await axios.post(`/api/book-rating/${id}`, null, {
+            await axios.post(`/api/book-rating/addbook/${id}`, null, {
                 params: {
                     rating: newRating,
-                },
-                headers: {
-                    Authorization: `Bearer ${token}`,
                 },
             });
             console.log(`Book ${id} rated with ${newRating} stars.`);

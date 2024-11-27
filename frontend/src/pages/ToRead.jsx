@@ -14,7 +14,7 @@ function ToRead() {
 
     const fetchToReadBooks = async () => {
         try {
-            const response = await axios.get('/api/toread/all');
+            const response = await axios.get('/api/user-toread/all');
             setToReadBooks(response.data);
         } catch (error) {
             console.error('Error fetching ToRead books:', error);
@@ -30,7 +30,7 @@ function ToRead() {
     };
     const removeBook = async (bookId) => {
         try {
-            await axios.delete(`/api/toread/removebook/${bookId}`);
+            await axios.delete(`/api/user-toread/removebook/${bookId}`);
             setToReadBooks(toReadBooks.filter(book => book.id !== bookId));
         } catch (error) {
             console.error('Error removing book from ToRead list:', error);

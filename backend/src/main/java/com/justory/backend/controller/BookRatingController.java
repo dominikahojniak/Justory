@@ -27,7 +27,7 @@ public class BookRatingController {
         this.userService = userService;
     }
 
-    @PostMapping("/{bookId}")
+    @PostMapping("addbook/{bookId}")
     public ResponseEntity<?> addRating(
             @PathVariable("bookId") Integer bookId,
             @RequestParam("rating") int rating,

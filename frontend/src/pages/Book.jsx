@@ -114,7 +114,7 @@ const Book = () => {
             return;
         }
         try {
-            await axios.post(`/api/toread/addbook/${book.id}`);
+            await axios.post(`/api/user-toread/addbook/${book.id}`);
             setIsAdded(true);
             setAddError("");
         } catch (error) {

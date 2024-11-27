@@ -39,7 +39,7 @@ public class SecurityConfig {
                                 "/api/access-types",
                                 "/api/platforms",
                                 "/api/formats",
-                                "/api/toread/**",
+                                "/api/user-toread/**",
                                 "/api/booksLocations",
                                 "/api/search",
                                 "/api/categories/**",
@@ -49,7 +49,8 @@ public class SecurityConfig {
                         .permitAll()
                         .requestMatchers(
                                 HttpMethod.POST,
-                                "api/books/add"
+                                "api/books/add",
+                                "api/books/edit"
                         )
                         .hasRole("ADMIN")
                         .requestMatchers(

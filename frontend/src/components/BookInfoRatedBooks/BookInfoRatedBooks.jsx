@@ -12,12 +12,7 @@ const BookInfoToRead = ({id, title, authors = [], imageSrc, rating, onRatingRemo
 
     const handleRemoveRating = async () => {
         try {
-            const token = localStorage.getItem('token');
-            await axios.delete(`/api/book-rating/removebook/${id}`, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            });
+            await axios.delete(`/api/book-rating/removebook/${id}`);
             onRatingRemoved(id);
             console.log(`Successfully removed rating for book ${title}`);
         } catch (error) {

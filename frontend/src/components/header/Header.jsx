@@ -23,11 +23,7 @@ const Header = ({ activePage }) => {
     useEffect(() => {
         const fetchUserData = async () => {
             try {
-                const response = await axios.get('/api/users/profile', {
-                    headers: {
-                        Authorization: `Bearer ${localStorage.getItem('token')}`
-                    }
-                });
+                const response = await axios.get('/api/users/profile');
                 setIsLoggedIn(true);
                 setIsAdmin(response.data.role === 'ADMIN');
             } catch (error) {

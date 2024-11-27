@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/toread")
+@RequestMapping("api/user-toread")
 public class UserToReadListController {
 
     private final UserToReadListService userToReadListService;
