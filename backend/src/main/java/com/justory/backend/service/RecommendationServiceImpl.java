@@ -109,6 +109,7 @@ public class RecommendationServiceImpl implements RecommendationService {
             authorWeights.put(entry.getKey(), entry.getValue() / totalWeight);
         }
 
+
         List<Books> potentialBooks = booksRepository.findBooksByCategoriesOrAuthors(
                 new ArrayList<>(categoryWeights.keySet()),
                 new ArrayList<>(authorWeights.keySet())

@@ -165,7 +165,7 @@ const EditBook = () => {
             });
 
             alert('Książka została pomyślnie zaktualizowana!');
-            //navigate(`/book/${bookData.title}`);
+            navigate(`/book/${bookData.title}`);
         } catch (error) {
             console.error('Error updating book:', error);
             alert('Błąd podczas aktualizacji książki.');

@@ -50,7 +50,7 @@ public class BooksServiceImpl implements BooksService {
             return null;
         }
 
-        Books book = booksList.get(0);  // Get the first result
+        Books book = booksList.get(0);
         BooksDTO bookDTO = booksMapper.toDTO(book);
         Set<BookAvailabilities> availabilities = book.getAvailabilities();
 
@@ -76,21 +76,33 @@ public class BooksServiceImpl implements BooksService {
         book.setImg(filePath);
 
         Set<Authors> authors = book.getAuthors().stream()
-                .map(author -> authorsRepository.findByFirstNameAndLastName(
-                                author.getFirstName(), author.getLastName())
-                        .orElseGet(() -> authorsRepository.save(author)))
+                .map(author -> {
+                    String formattedFirstName = formatString(author.getFirstName().trim());
+                    String formattedLastName = formatString(author.getLastName().trim());
+                    author.setFirstName(formattedFirstName);
+                    author.setLastName(formattedLastName);
+                    return authorsRepository.findByFirstNameAndLastName(formattedFirstName, formattedLastName)
+                            .orElseGet(() -> authorsRepository.save(author));
+                })
                 .collect(Collectors.toSet());
 
         book.setAuthors(authors);
 
         Set<Categories> categories = book.getCategories().stream()
-                .map(category -> categoriesRepository.findByName(category.getName())
-                        .orElseGet(() -> categoriesRepository.save(category)))
+                .map(category -> {
+                    String formattedName = formatString(category.getName().trim());
+                    category.setName(formattedName);
+                    return categoriesRepository.findByName(formattedName)
+                            .orElseGet(() -> categoriesRepository.save(category));
+                })
                 .collect(Collectors.toSet());
 
         book.setCategories(categories);
 
-        Publishers publisher = publishersRepository.findByName(book.getPublisher().getName())
+        String formattedPublisherName = formatString(book.getPublisher().getName().trim());
+        book.getPublisher().setName(formattedPublisherName);
+
+        Publishers publisher = publishersRepository.findByName(formattedPublisherName)
                 .orElseGet(() -> publishersRepository.save(book.getPublisher()));
         book.setPublisher(publisher);
 
@@ -194,19 +206,19 @@ public class BooksServiceImpl implements BooksService {
                 .map(authorDTO -> authorsRepository.findByFirstNameAndLastName(
                                 authorDTO.getFirstName(), authorDTO.getLastName())
                         .orElseGet(() -> authorsRepository.save(
-                                new Authors().setFirstName(authorDTO.getFirstName())
-                                        .setLastName(authorDTO.getLastName()))))
+                                new Authors().setFirstName(formatString(authorDTO.getFirstName()))
+                                        .setLastName(formatString(authorDTO.getLastName())))))
                 .collect(Collectors.toSet());
         book.setAuthors(authors);
 
         Set<Categories> categories = bookDTO.getCategories().stream()
                 .map(categoryDTO -> categoriesRepository.findByName(categoryDTO.getName())
-                        .orElseGet(() -> categoriesRepository.save(new Categories().setName(categoryDTO.getName()))))
+                        .orElseGet(() -> categoriesRepository.save(new Categories().setName(formatString(categoryDTO.getName())))))
                 .collect(Collectors.toSet());
         book.setCategories(categories);
 
         Publishers publisher = publishersRepository.findByName(bookDTO.getPublisher().getName())
-                .orElseGet(() -> publishersRepository.save(new Publishers().setName(bookDTO.getPublisher().getName())));
+                .orElseGet(() -> publishersRepository.save(new Publishers().setName(formatString(bookDTO.getPublisher().getName()))));
         book.setPublisher(publisher);
 
         Set<BookAvailabilities> existingAvailabilities = book.getAvailabilities();
@@ -244,5 +256,11 @@ public class BooksServiceImpl implements BooksService {
 
         Books updatedBook = booksRepository.save(book);
         return booksMapper.toDTO(updatedBook);
+    }
+    private String formatString(String name) {
+        if (name == null || name.isEmpty()) {
+            return name;
+        }
+        return name.substring(0, 1).toUpperCase() + name.substring(1).toLowerCase();
     }
 }

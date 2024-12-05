@@ -137,7 +137,7 @@ const Book = () => {
         }
         try {
             await axios.delete(`/api/books/delete/${book.id}`);
-            setAddResponseDeleted("Usunięto na stałe z aplikacji");
+            setAddResponseDeleted("Usunięto na stałe z aplikacji!");
             setTimeout(() => {
                 navigate('/');
             }, 3000);
@@ -199,7 +199,6 @@ const Book = () => {
                             <span key={category.id}>{category.name}</span>
                         )).reduce((prev, curr) => [prev, ', ', curr])}</p>
                     </div>
-                    {/* Subscription Section */}
                     <div className="subscription">
                         <div className="news-title-container-book">
                         <div className="news-title-book">
@@ -220,8 +219,6 @@ const Book = () => {
                             }
                         </div>
                     </div>
-
-                    {/* Purchase Section */}
                     <div className="buy">
                         <div className="news-title-container-book">
                             <div className="news-title-book">
