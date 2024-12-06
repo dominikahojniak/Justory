@@ -34,7 +34,7 @@ public class BooksMapper {
     }
 
     public Books toEntity(BooksDTO bookDTO) {
-        String imgPath = "./uploads/books/" + bookDTO.getTitle() + ".jpg";
+        String imgPath = "/app/uploads/books/" + bookDTO.getTitle() + ".jpg";
         return new Books()
                 .setTitle(bookDTO.getTitle())
                 .setLanguage(bookDTO.getLanguage())

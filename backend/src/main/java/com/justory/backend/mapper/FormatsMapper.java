@@ -15,7 +15,7 @@ public class FormatsMapper {
     }
 
     public Formats toEntity(FormatsDTO dto) {
-        String imgPath = "./uploads/formats/" + dto.getName() + ".jpg";
+        String imgPath = "/app/uploads/formats/" + dto.getName() + ".jpg";
         return new Formats()
                 .setName(dto.getName())
                 .setImg(imgPath);

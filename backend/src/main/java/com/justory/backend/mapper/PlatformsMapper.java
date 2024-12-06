@@ -16,7 +16,7 @@ public class PlatformsMapper {
     }
 
     public Platforms toEntity(PlatformsDTO dto) {
-        String imgPath = "./uploads/platforms/" + dto.getName() + ".jpg";
+        String imgPath = "/app/uploads/platforms/" + dto.getName() + ".jpg";
         return new Platforms()
                 .setName(dto.getName())
                 .setImg(imgPath);
