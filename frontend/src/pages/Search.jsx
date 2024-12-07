@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import '../pages_css/Search.css';
+import '../pages_css/search.css';
 import Footer from '../components/Footer/Footer.jsx';
 import Header from '../components/Header/Header.jsx';
 import Searching from '../components/Searching/Searching.jsx';

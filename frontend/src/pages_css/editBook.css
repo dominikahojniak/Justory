@@ -47,3 +47,10 @@ body {
     font-family:'Roboto', serif;
     font-size:24px;
 }
+.char-counter{
+    font-size: 12px;
+    margin: 0 0;
+    width: 24vw;
+    display: flex;
+    justify-content: end;
+}

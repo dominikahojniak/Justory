@@ -9,6 +9,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import InputFileUpload from "../components/InputFileUpload.jsx";
 import dayjs from 'dayjs';
+import {validateISBN, validateDescription, validateFile, validateTitle, validateAuthor, validateCategories, validatePublisher, validateLanguage} from '../validation/validators.jsx';
 
 const AddBook = () => {
     const [platforms, setPlatforms] = useState([]);
@@ -113,6 +114,57 @@ const AddBook = () => {
         }
     };
 
+    const handleTitleChange = (e) => {
+        const value = e.target.value;
+        setTitle(value);
+        setErrors(prev => ({ ...prev, title: !validateTitle(value) }));
+    };
+
+    const handleAuthorChange = (e) => {
+        const value = e.target.value;
+        setAuthor(value);
+        setErrors(prev => ({ ...prev, author: !validateAuthor(value) }));
+    };
+
+    const handleISBNChange = (e) => {
+        const value = e.target.value;
+        setISBN(value);
+        setErrors(prev => ({ ...prev, ISBN: !validateISBN(value) }));
+    };
+
+    const handleCategoriesChange = (e) => {
+        const value = e.target.value;
+        setCategories(value);
+        setErrors(prev => ({ ...prev, categories: !validateCategories(value) }));
+    };
+
+    const handlePublisherChange = (e) => {
+        const value = e.target.value;
+        setPublisher(value);
+        setErrors(prev => ({ ...prev, publisher: !validatePublisher(value) }));
+    };
+
+    const handleDateChange = (newValue) => {
+        setDate(newValue);
+    };
+
+    const handleLanguageChange = (e) => {
+        const value = e.target.value;
+        setLanguage(value);
+        setErrors(prev => ({ ...prev, language: !validateLanguage(value) }));
+    };
+
+    const handleDescriptionChange = (e) => {
+        const value = e.target.value;
+        setDescription(value);
+        setErrors(prev => ({ ...prev, description: !validateDescription(value) }));
+    };
+
+    const handleFileChange = (e) => {
+        const selectedFile = e.target.files[0];
+        setFile(selectedFile);
+        setErrors(prev => ({ ...prev, file: !validateFile(selectedFile) }));
+    };
     return (
         <div className="addbook-container">
             <Header activePage="addbook" />
@@ -123,30 +175,55 @@ const AddBook = () => {
                 <div className="addbook">
                     <form className="form-addbook" onSubmit={handleSubmit}>
                         <input name="title" type="text" placeholder="Tytuł" id="title" value={title}
-                               onChange={(e) => setTitle(e.target.value)}/>
+                               onChange={handleTitleChange} className={errors.title ? 'error' : ''}/>
+                        {errors.title &&
+                            <p className="error-message">Tytuł jest wymagany i nie może przekraczać 255 znaków.</p>}
                         <input name="author" type="text" placeholder="Autor (oddziel przecinkiem)" id="author"
-                               value={author} onChange={(e) => setAuthor(e.target.value)}/>
+                               value={author} onChange={handleAuthorChange} className={errors.author ? 'error' : ''}/>
+                        {errors.author &&
+                            <p className="error-message">Autor jest wymagany. Podaj imię i nazwisko każdego autora,
+                                oddzielone przecinkiem.</p>}
                         <input name="ISBN" type="text" placeholder="ISBN" id="ISBN" value={ISBN}
-                               onChange={(e) => setISBN(e.target.value)}/>
+                               onChange={handleISBNChange} className={errors.ISBN ? 'error' : ''}/>
+                        {errors.ISBN && <p className="error-message">ISBN musi składać się z 13 cyfr.</p>}
                         <input name="categories" type="text" placeholder="Kategoria (oddziel przecinkiem)"
-                               id="categories" value={categories} onChange={(e) => setCategories(e.target.value)}/>
+                               id="categories" value={categories} onChange={handleCategoriesChange}
+                               className={errors.categories ? 'error' : ''}/>
+                        {errors.categories &&
+                            <p className="error-message">Kategoria jest wymagana. Podaj niepuste nazwy kategorii
+                                oddzielone przecinkiem.</p>}
                         <input name="publisher" type="text" placeholder="Wydawnictwo" id="publisher" value={publisher}
-                               onChange={(e) => setPublisher(e.target.value)}/>
+                               onChange={handlePublisherChange} className={errors.publisher ? 'error' : ''}/>
+                        {errors.publisher &&
+                            <p className="error-message">Wydawnictwo jest wymagane i nie może przekraczać 255
+                                znaków.</p>}
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                             <div className="date-picker-container">
                                 <DatePicker
                                     label="Wybierz datę"
                                     value={date}
-                                    onChange={(newValue) => setDate(newValue)}
-                                    renderInput={(params) => <input {...params} />}
+                                    onChange={handleDateChange}
+                                    renderInput={(params) => (
+                                        <input
+                                            {...params}
+                                        />
+                                    )}
                                 />
                             </div>
                         </LocalizationProvider>
                         <input name="language" type="text" placeholder="Język" id="language" value={language}
-                               onChange={(e) => setLanguage(e.target.value)}/>
-                        <input name="description" type="text" placeholder="Opis" id="description" value={description}
-                               onChange={(e) => setDescription(e.target.value)}/>
-                        <InputFileUpload onChange={(e) => setFile(e.target.files[0])}/>
+                               onChange={handleLanguageChange} className={errors.language ? 'error' : ''}/>
+                        {errors.language &&
+                            <p className="error-message">Język jest wymagany, nie może zawierać cyfr i nie może
+                                przekraczać 255 znaków.</p>}
+                        <textarea name="description" placeholder="Opis" id="description" value={description} onChange={handleDescriptionChange}
+                            className={errors.description ? 'error' : ''} maxLength="3000" aria-invalid={errors.description} aria-describedby="description-error"
+                        ></textarea>
+                        <p className="char-counter">{description.length}/3000 znaków</p>
+                        {errors.description &&
+                            <p className="error-message">Opis jest wymagany, może mieć maksymalnie 3000 znaków.</p>}
+                        <InputFileUpload onChange={handleFileChange} className={errors.file ? 'error' : ''}/>
+                        {errors.file && <p className="error-message">Zdjęcie musi być w formacie JPG lub PNG.</p>}
                         <h3>Dodaj dostępności</h3>
                         <AccessTypeComponent
                             platforms={platforms}
@@ -159,7 +236,7 @@ const AddBook = () => {
                     </form>
                 </div>
             </main>
-            <Footer />
+            <Footer/>
         </div>
     );
 };

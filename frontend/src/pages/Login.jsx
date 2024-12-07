@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import '../pages_css/login.css';
 import maleMobileLogo from '../img/maleMobileLogo.png';
-import Footer from '../components/footer/Footer.jsx';
-import Header from '../components/header/Header.jsx';
+import Footer from '../components/Footer/Footer.jsx';
+import Header from '../components/Header/Header.jsx';
 import axios from '../../axiosConfig.js';
 import { useNavigate } from 'react-router-dom';
 const Login = () => {

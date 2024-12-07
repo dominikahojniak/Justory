@@ -10,6 +10,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs from 'dayjs';
 import AccessTypeComponent from "../components/accessTypes/AccessTypeComponent.jsx";
+import {validateISBN, validateDescription, validateFile, validateTitle, validateAuthor, validateCategories, validatePublisher, validateLanguage} from '../validation/validators.jsx';
 const EditBook = () => {
     const { title } = useParams();
     const navigate = useNavigate();
@@ -33,6 +34,16 @@ const EditBook = () => {
 
     const [loading, setLoading] = useState(true);
     const [bookId, setBookId] = useState(null);
+    const [errors, setErrors] = useState({
+        title: false,
+        author: false,
+        language: false,
+        description: false,
+        ISBN: false,
+        file: false,
+        categories: false,
+        publisher: false,
+    });
 
     const transformAvailability = (availabilities) => {
         const transformed = {};
@@ -171,6 +182,53 @@ const EditBook = () => {
             alert('Błąd podczas aktualizacji książki.');
         }
     };
+    const handleTitleChange = (e) => {
+        const value = e.target.value;
+        setBookData(prev => ({ ...prev, title: value }));
+        setErrors(prev => ({ ...prev, title: !validateTitle(value) }));
+    };
+
+    const handleAuthorChange = (e) => {
+        const value = e.target.value;
+        setBookData(prev => ({ ...prev, authors: value }));
+        setErrors(prev => ({ ...prev, author: !validateAuthor(value) }));
+    };
+
+    const handleISBNChange = (e) => {
+        const value = e.target.value;
+        setBookData(prev => ({ ...prev, isbn: value }));
+        setErrors(prev => ({ ...prev, ISBN: !validateISBN(value) }));
+    };
+
+    const handleCategoriesChange = (e) => {
+        const value = e.target.value;
+        setBookData(prev => ({ ...prev, categories: value }));
+        setErrors(prev => ({ ...prev, categories: !validateCategories(value) }));
+    };
+
+    const handlePublisherChange = (e) => {
+        const value = e.target.value;
+        setBookData(prev => ({ ...prev, publisher: value }));
+        setErrors(prev => ({ ...prev, publisher: !validatePublisher(value) }));
+    };
+
+    const handleLanguageChange = (e) => {
+        const value = e.target.value;
+        setBookData(prev => ({ ...prev, language: value }));
+        setErrors(prev => ({ ...prev, language: !validateLanguage(value) }));
+    };
+
+    const handleDescriptionChange = (e) => {
+        const value = e.target.value;
+        setBookData(prev => ({ ...prev, description: value }));
+        setErrors(prev => ({ ...prev, description: !validateDescription(value) }));
+    };
+
+    const handleFileChange = (e) => {
+        const selectedFile = e.target.files[0];
+        setBookData(prev => ({ ...prev, file: selectedFile }));
+        setErrors(prev => ({ ...prev, file: !validateFile(selectedFile) }));
+    };
 
     if (loading) return <p>Ładowanie...</p>;
 
@@ -184,17 +242,23 @@ const EditBook = () => {
                 <div className="addbook">
                     <form className="form-editbook" onSubmit={handleSubmit}>
                         <input name="title" type="text" placeholder="Tytuł" id="etitle" value={bookData.title}
-                               onChange={handleInputChange}/>
+                               onChange={handleTitleChange}
+                               className={errors.title ? 'error' : ''}
+                               aria-invalid={errors.title}
+                               aria-describedby="title-error"/>
+                        {errors.title && <p id="title-error" className="error-message">Tytuł jest wymagany i nie może przekraczać 255 znaków.</p>}
                         <input name="authors" type="text" placeholder="Autor (oddziel przecinkiem)" id="eauthor"
-                               value={bookData.authors} onChange={handleInputChange}/>
+                               value={bookData.authors} onChange={handleAuthorChange} className={errors.author ? 'error' : ''} aria-invalid={errors.author} aria-describedby="author-error"/>
+                        {errors.author && <p id="author-error" className="error-message">Autor jest wymagany. Podaj imię i nazwisko każdego autora, oddzielone przecinkiem.</p>}
                         <input name="ISBN" type="text" placeholder="ISBN" id="eISBN" value={bookData.isbn}
-                               onChange={handleInputChange}/>
-                        <input name="categories" type="text" placeholder="Kategoria (oddziel przecinkiem)"
-                               id="ecategories"
-                               value={bookData.categories} onChange={handleInputChange}/>
-                        <input name="publisher" type="text" placeholder="Wydawnictwo" value={bookData.publisher}
-                               id="epublisher"
-                               onChange={handleInputChange}/>
+                               onChange={handleISBNChange} className={errors.ISBN ? 'error' : ''} aria-invalid={errors.ISBN} aria-describedby="isbn-error"/>
+                        {errors.ISBN && <p id="isbn-error" className="error-message">ISBN musi składać się z 13 cyfr.</p>}
+                        <input name="categories" type="text" placeholder="Kategoria (oddziel przecinkiem)" id="ecategories" value={bookData.categories}  onChange={handleCategoriesChange}
+                               className={errors.categories ? 'error' : ''} aria-invalid={errors.categories} aria-describedby="categories-error"/>
+                        {errors.categories && <p id="categories-error" className="error-message">Kategoria jest wymagana. Podaj niepuste nazwy kategorii oddzielone przecinkiem.</p>}
+                        <input name="publisher" type="text" placeholder="Wydawnictwo" value={bookData.publisher} id="epublisher"
+                               onChange={handlePublisherChange} className={errors.publisher ? 'error' : ''} aria-invalid={errors.publisher} aria-describedby="publisher-error"/>
+                        {errors.publisher && <p id="publisher-error" className="error-message">Wydawnictwo jest wymagane i nie może przekraczać 255 znaków.</p>}
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                             <div className="date-picker-container">
                                 <DatePicker
@@ -206,10 +270,23 @@ const EditBook = () => {
                             </div>
                         </LocalizationProvider>
                         <input name="language" type="text" placeholder="Język" value={bookData.language} id="elanguage"
-                               onChange={handleInputChange}/>
-                        <input name="description" placeholder="Opis" value={bookData.description} id="edescription"
-                               onChange={handleInputChange}/>
-                        <InputFileUpload onChange={(e) => setBookData({...bookData, file: e.target.files[0]})}/>
+                               onChange={handleLanguageChange} className={errors.language ? 'error' : ''} aria-invalid={errors.language} aria-describedby="language-error"/>
+                        {errors.language && <p id="language-error" className="error-message">Język jest wymagany, nie może zawierać cyfr i nie może przekraczać 255 znaków.</p>}
+                        <textarea
+                            name="description"
+                            placeholder="Opis"
+                            id="edescription"
+                            value={bookData.description}
+                            onChange={handleDescriptionChange}
+                            className={errors.description ? 'error' : ''}
+                            maxLength="3000"
+                            aria-invalid={errors.description}
+                            aria-describedby="description-error"
+                        ></textarea>
+                        <p className="char-counter">{bookData.description.length}/3000 znaków</p>
+                        {errors.description && <p id="description-error" className="error-message">Opis jest wymagany, może mieć maksymalnie 3000 znaków.</p>}
+                        <InputFileUpload  onChange={handleFileChange} className={errors.file ? 'error' : ''} aria-invalid={errors.file} aria-describedby="file-error"/>
+                        {errors.file && <p id="file-error" className="error-message">Zdjęcie musi być w formacie JPG lub PNG.</p>}
                         <h3>Edytuj dostępności</h3>
                         <AccessTypeComponent
                             platforms={platforms}
