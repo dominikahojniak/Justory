@@ -4,6 +4,7 @@ import '../pages_css/home.css';
 import Footer from '../components/Footer/Footer.jsx';
 import Header from '../components/Header/Header.jsx';
 import HomeBook from '../components/home_book/HomeBook.jsx';
+import Banner from '../img/baner.png'
 import axios from '../../axiosConfig.js';
 const Home = () => {
     const [username, setUsername] = useState("");
@@ -55,7 +56,7 @@ const Home = () => {
             <Header activePage="home" />
             <main>
                 <div className="description">
-                    <h3>Odkryj historie, których szukasz,<br/>i miejsca, w których możesz je znaleźć.</h3>
+                    <img src={Banner} alt="Baner promocyjny" className="banner-image"/>
                     <p>Dołącz do justStory, klucza do premier książkowych, i otwórz drzwi<br/>do świata czytelniczych
                         możliwości.</p>
                 </div>

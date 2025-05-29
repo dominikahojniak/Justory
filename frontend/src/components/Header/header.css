@@ -77,15 +77,12 @@ margin-right: 10px;
 }
 
 @media (max-width: 900px) {
-    .header-nav.logsign-page {
-        display: none;
-    }
     .header-nav{
         position: fixed;
         bottom: 0;
         top: auto;
         padding: 0;
-        width: 100vw;
+        width: calc(100vw - 1px);
         padding: 0;
         box-shadow: 0 -1px 1px #000000;
     }
@@ -103,8 +100,11 @@ margin-right: 10px;
         justify-items: center;
         align-self: center;
     }
-    .loginsignup a:first-child{
+    .loginsignup a:nth-child(2){
         display: none;
+    }
+    .loginsignup a:first-child{
+        font-size: 11px;
     }
     #signup-link{
         margin-right: 0px;
@@ -135,5 +135,8 @@ margin-right: 10px;
     }
     .header-nav ul li:nth-child(6) {
         margin-right: 0%;
+    }
+    .header-nav a {
+        font-size: 0; /* Ukrycie tekstu */
     }
 }

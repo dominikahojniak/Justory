@@ -16,7 +16,6 @@ public class BooksLocationController {
             @RequestParam double lng,
             @RequestParam int radius) {
 
-
         String overpassUrl = String.format(
                 Locale.US,
                 "https://overpass-api.de/api/interpreter?data=[out:json];"
@@ -35,3 +34,5 @@ public class BooksLocationController {
         }
     }
 }
+
+

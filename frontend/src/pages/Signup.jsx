@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '/app/src/pages_css/signup.css';
+import '../pages_css/signup.css';
 import { useNavigate } from 'react-router-dom';
 import Footer from '../components/Footer/Footer.jsx';
 import maleMobileLogo from '../img/maleMobileLogo.png';

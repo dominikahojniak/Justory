@@ -17,6 +17,7 @@ import EditIcon from '@mui/icons-material/Edit';
 
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
+    iconUrl: BookstoreIcon,
     iconRetinaUrl: BookstoreIcon,
     shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
 });
@@ -143,6 +144,7 @@ const Book = () => {
             }, 3000);
         } catch (error) {
             console.error('Error deleting book:', error);
+            alert('Błąd podczas usuwania książki!')
         }
     };
 

@@ -114,14 +114,12 @@ public class RecommendationServiceImpl implements RecommendationService {
                 new ArrayList<>(categoryWeights.keySet()),
                 new ArrayList<>(authorWeights.keySet())
         );
-
         List<Integer> excludedBookIds = getUserExcludedBookIds(userId);
 
         Map<Books, Double> potentialBooksWithScore = new HashMap<>();
 
         for (Books book : potentialBooks) {
             if (excludedBookIds.contains(book.getId())) continue;
-
             double score = 0.0;
 
             if (book.getCategories() != null) {
@@ -156,6 +154,7 @@ public class RecommendationServiceImpl implements RecommendationService {
                 .limit(10)
                 .collect(Collectors.toList());
     }
+
 
     private List<Integer> getUserExcludedBookIds(Integer userId) {
         List<Integer> toReadBookIds = userToReadListService.getUserToReadBooks(userId)

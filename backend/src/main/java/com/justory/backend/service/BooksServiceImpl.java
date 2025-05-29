@@ -91,6 +91,7 @@ public class BooksServiceImpl implements BooksService {
         Set<Categories> categories = book.getCategories().stream()
                 .map(category -> {
                     String formattedName = formatString(category.getName().trim());
+                    System.out.println(formattedName);
                     category.setName(formattedName);
                     return categoriesRepository.findByName(formattedName)
                             .orElseGet(() -> categoriesRepository.save(category));

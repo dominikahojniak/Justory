@@ -8,8 +8,8 @@ export const validatePhoneNumber = (phone) => {
 };
 
 export const validatePassword = (password) => {
-    const digitRegex = /\d/;      // sprawdza czy jest co najmniej jedna cyfra
-    const uppercaseRegex = /[A-Z]/; // sprawdza czy jest co najmniej jedna wielka litera
+    const digitRegex = /\d/;
+    const uppercaseRegex = /[A-Z]/;
     return digitRegex.test(password) && uppercaseRegex.test(password);
 };
 
@@ -20,11 +20,10 @@ export const validateTitle = (title) => {
 export const validateAuthor = (author) => {
     if (author.trim() === '') return false;
     const authors = author.split(',').map(a => a.trim());
-    return authors.every(a => a.split(' ').length >= 2); // Każdy autor powinien mieć imię i nazwisko
+    return authors.every(a => a.split(' ').length >= 2);
 };
 
 export const validateISBN = (isbn) => {
-    // ISBN musi mieć dokładnie 13 cyfr
     const isbnRegex = /^\d{13}$/;
     return isbnRegex.test(isbn);
 };
@@ -41,7 +40,7 @@ export const validatePublisher = (publisher) => {
 
 export const validateLanguage = (language) => {
     if (language.trim() === '') return false;
-    const languageRegex = /^[A-Za-z\s]+$/; // Tylko litery i spacje
+    const languageRegex = /^[A-Za-z\s]+$/;
     return languageRegex.test(language) && language.length <= 255;
 };
 
@@ -52,7 +51,6 @@ export const validateDescription = (description) => {
 
 export const validateFile = (file) => {
     if(!file) return false;
-    // Plik musi być w formacie jpg lub png
     const validTypes = ['image/jpeg', 'image/png'];
     return validTypes.includes(file.type);
 };

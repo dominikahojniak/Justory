@@ -118,10 +118,23 @@
       width: calc(100vw - 1px);
     }
     .search-items{
-      width: 100vw;
+      width: calc(100vw - 1px);
     }
     .search-item-container{
-      width: 100vw;
+      width: calc(100vw - 1px);
       margin: 0 auto;
+    }
+    .categories-list {
+      width: calc(100vw - 1px);
+      display: flex;
+      flex-direction: column;
+      margin: 1% auto 0;
+    }
+    .all-categories{
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 5px;
+      justify-content: center;
     }
   }

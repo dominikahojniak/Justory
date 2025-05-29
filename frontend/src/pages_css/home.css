@@ -74,6 +74,11 @@ body{
     display: flex;
     justify-content: center;
 }
+.banner-image{
+    margin-top: 2%;
+    height: 600px;
+    width: auto;
+}
 
 /*stopka*/
 
